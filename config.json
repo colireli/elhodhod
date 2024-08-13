@@ -1,0 +1,14 @@
+{
+    "version" : "7.8",
+
+    "sql_file"  : "",
+
+    "files"     :
+    [
+        {
+            "name": "Modules",
+            "base_directory": "Modules"
+        }
+       
+    ]
+}

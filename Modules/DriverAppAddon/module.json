@@ -1,0 +1,13 @@
+{
+    "name": "DriverAppAddon",
+    "alias": "driverappaddon",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\DriverAppAddon\\Providers\\DriverAppAddonServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

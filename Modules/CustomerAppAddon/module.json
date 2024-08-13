@@ -1,0 +1,13 @@
+{
+    "name": "CustomerAppAddon",
+    "alias": "customerappaddon",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\CustomerAppAddon\\Providers\\CustomerAppAddonServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

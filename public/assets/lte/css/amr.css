@@ -1,0 +1,22 @@
+:root {
+    --d: 700ms;
+    --e: cubic-bezier(0.19, 1, 0.22, 1);
+    --font-sans: "Rubik", sans-serif;
+    --font-serif: "Cardo", serif;
+  }
+
+.message {
+    background-color: #1976d20d;
+    padding: 1em 1em 1em 1.5em;
+    margin: 0 0 1em 0;
+    border-left-width: 6px;
+    border-left-style: solid;
+    border-radius: 3px;
+    position: relative;
+    line-height: 1.5;
+}
+.message--warning { border-left-color: #1976D2; }
+
+.iti ,  .iti--allow-dropdown ,  .iti--separate-dial-code {
+  width: 100% !important;
+}

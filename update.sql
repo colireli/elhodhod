@@ -1,0 +1,1 @@
+UPDATE `settings` SET `payload` = '7.8' WHERE `settings`.`name` = 'current_version';
