@@ -9,6 +9,7 @@
 .phpunit.result.cache
 docker-compose.override.yml
 Homestead.json
+auth.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
@@ -26,5 +27,4 @@ storage/framework/cache/data/
 /Modules/Payments/Resources/views/admin
 /Modules/Users/Resources/views/admin
 /Modules/Widget/Resources/views/admin
-.env
 /temp
