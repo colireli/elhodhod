@@ -1,0 +1,59 @@
+on: 
+  push:
+    branches:
+      - v1
+      - dev
+
+name: 🚀 Deploy staging
+jobs:
+
+  deploy:
+    name: 🎉 Deploy staging
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+
+
+    # - name: Use Node.js 14
+    #   uses: actions/setup-node@v2-beta
+    #   with:
+    #     node-version: '14'
+
+
+    - name: 🔨 Build Project Assets
+      run: |
+        npm install
+        npm run prod
+
+
+
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.composer/cache/files
+        key: dependencies-composer-${{ hashFiles('composer.json') }}
+
+
+    - name: 🔨 Install Composer Dependencies
+      run: |
+        composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+
+  
+
+
+    - name: 📂 Clear caches
+      run: |
+        
+      # composer dump-autoload
+      # composer clear-cache
+
+
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.1.0
+      with:
+        server: ftp.khaled.bdaia.net
+        username: khalid
+        password: ${{ 'SERwklm8UXp6eLXmgF' }}
+        server-dir: /public_html/
