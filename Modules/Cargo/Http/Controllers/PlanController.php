@@ -388,4 +388,54 @@ class PlanController extends Controller
         }
         return redirect()->route('admin.plan.index')->with(['message_alert' => __('Plan Deleted Successefully')]);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createArea(Request $request)
+    {
+        if(auth()->check() && (auth()->user()->role != 1 && auth()->user()->role != 3)) {
+            abort(401);
+        }
+        try{
+           
+            $planfee = PlanFee::find($request->id);
+               if($planfee){
+                $area_ =  Area::create([
+                    'country_id' => 4,
+                    'state_id'=> $planfee->state_id,
+                    'name' => $request->area,
+                    'created_at'    => now(),
+                    'updated_at'    => now()
+                ]);
+                
+                if($area_){
+                    PlanAreaFee::insert([
+                        'area_id'      => $area_->id,
+                        'plan_id'       => $planfee->plan_id,
+                        'plan_fee_id'    => $planfee->id,
+                        'home_fee' => $planfee->home_fee,
+                        'desk_fee' => $planfee->desk_fee,
+                        'return_fee' => $planfee->return_fee,
+                        'recovery_rate' => $planfee->recovery_rate,
+                        'company' => $planfee->company,
+                        'active' => $planfee->active,
+                        'created_at'    => now(),
+                        'updated_at'    => now()
+                        ]);
+                }
+                
+               }        
+           
+        } catch (\Exception $ex) {
+            echo $ex->getMessage() ;
+            dd($ex->getMessage());
+            Log::debug($e->getMessage());
+            return false ;
+        }
+        
+        return true ;
+    } 
 }

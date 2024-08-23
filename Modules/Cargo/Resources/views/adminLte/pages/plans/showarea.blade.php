@@ -45,7 +45,12 @@
                     @foreach ($planFee->areas as $fee)
                     <tr>
                         <td>{{ $i }}</td>
-                        <td class="key">{{ $fee->area->name }}</td>
+                        <td class="key">{{ $fee->area->name }}
+                            <a class="btn btn-sm btn-secondary btn-action-table"
+                               href="{{ route('areas.edit', $fee->area->id) }}" title="{{ __('Edit') }}">
+                                <i class="fas fa-edit fa-fw"></i>
+                            </a> 
+                        </td> 
                         <td>
                         <div class="form-group">
                             <select class="form-control kt-select2 how-know-us" data-control="select2"

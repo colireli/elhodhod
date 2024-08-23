@@ -42,7 +42,12 @@
                     @foreach ($plan->fees as $fee)
                     <tr>
                         <td>{{ $i }}</td>
-                        <td class="key"> <a href="{{ route('admin.plan.showarea', $fee->id) }}"> {{ $fee->state->name }}</a></td>
+                        <td class="key"> 
+                            <a href="{{ route('admin.plan.showarea', $fee->id) }}"> {{ $fee->state->name }}</a>
+                            <button type="button" class="btn btn-sm btn-secondary btn-action-table" onclick="openCreateModel({{$fee->id}}, '{{ $fee->state->name }}')" title="{{ __('view.create') }}">
+                                <i class="fas fa-add fa-fw"></i>
+                            </button>
+                        </td>
                         <td>
                         <div class="form-group">
                             <select class="form-control kt-select2 how-know-us" data-control="select2"
@@ -126,6 +131,44 @@
         </div>
     </form>
 </div>
+
+@endsection
+
+
+@section('scripts')
+<script type="text/javascript">
+
+    function openCreateModel(id, name)
+    {
+            Swal.fire({
+                    title: "Create New Area Into " + name,
+                    input: 'text',
+                    inputLabel: 'Your area',
+                    inputPlaceholder: 'Type area name',
+                    showCancelButton: true,
+                    confirmButtonText: 'Create',
+                    inputValidator: (value) => {
+                        if (!value) {
+                            return 'You need to enter something!';
+                        }
+                    }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Trigger the button click event to proceed with the server event
+                            $.get("{{fr_route('admin.plan.createArea')}}?id="+id+"&area="+result.value+"").then(response => {
+                                if(response){
+
+                                    Swal.fire('Success!', 'Your area has been created.', 'success');
+                                }else{ 
+                                    Swal.fire('Warning!', 'Your area has been not created.', 'warning');
+
+                                }
+                            });
+                        }
+                    });
+    }
+
+</script>
 
 @endsection
 

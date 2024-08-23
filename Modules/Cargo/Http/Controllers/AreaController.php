@@ -11,6 +11,7 @@ use Modules\Cargo\Entities\Package;
 use Modules\Cargo\Entities\Country;
 use Modules\Cargo\Entities\State;
 use Modules\Cargo\Entities\Area;
+use Modules\Cargo\Entities\PlanAreaFee;
 use Modules\Cargo\Http\Requests\AreaRequest;
 use Modules\Acl\Repositories\AclRepository;
 
@@ -156,11 +157,11 @@ class AreaController extends Controller
         if (env('DEMO_MODE') == 'On') {
             return redirect()->back()->with(['error_message_alert' => __('view.demo_mode')]);
         }
-
+        $plan_ids = PlanAreaFee::where('area_id',$id)->get();
         Area::destroy($id);
+        PlanAreaFee::destroy($plan_ids);
         return response()->json(['message' => __('cargo::messages.deleted')]);
     }
-
 
     /**
      * Remove multi user from database.
@@ -174,7 +175,9 @@ class AreaController extends Controller
         }
 
         $ids = $request->ids;
+        $plan_ids = PlanAreaFee::whereIn('area_id', $ids)->pluck('id')->get();
         Area::destroy($ids);
+        PlanAreaFee::destroy($plan_ids);
         dd($reques);
         return response()->json(['message' => __('cargo::messages.multi_deleted')]);
     }
