@@ -434,6 +434,6 @@ class ShipmentActionHelper{
                 $closestMatch = $area['area']->name;
             }
         }
-        return $closestMatch;
+        return $closestMatch?$closestMatch:$inputName;
     }
 }
