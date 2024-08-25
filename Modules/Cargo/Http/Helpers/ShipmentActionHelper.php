@@ -6,6 +6,8 @@ use Modules\Cargo\Entities\Mission;
 use Modules\Cargo\Entities\Shipment;
 use Modules\Acl\Repositories\AclRepository;
 use Modules\Cargo\Http\Controllers\ShipmentController;
+use Modules\Cargo\Entities\Client;
+use Modules\Cargo\Entities\PlanFee;
 
 class ShipmentActionHelper{
 
@@ -399,5 +401,39 @@ class ShipmentActionHelper{
     {
 
             return $this->actions;
+    }
+
+    public static function getClosestMatch($inputName,$client_id,$state_id)
+    {
+        // Fetch all names from the database
+        //  $names = DB::table('areas')->pluck('name')->toArray();
+        $plan = Client::find($client_id);
+        $areas = PlanFee::with(['areas' => function ($query) {
+            $query
+            ->where('desk_fee',">","0")
+            ->where('active',"1")
+            ->orderBy('area_id');
+        }])
+        ->where('state_id',(string) $state_id)
+        ->where('plan_id',(string) $plan->plan_id)
+        ->where('active',"1")->first();
+
+        // Set an initial minimum distance and closest match
+        $minDistance = null;
+        $closestMatch = null;
+        //dd($areas['areas'][0]['area']['name']);
+        // Loop through each name in the database
+        foreach ($areas['areas'] as $area) {
+           // dd($area->name);
+            // Calculate the Levenshtein distance between the input and the current name
+            $distance = levenshtein($inputName, $area['area']->name);
+
+            // Check if this distance is the smallest found so far
+            if ($minDistance === null || $distance < $minDistance) {
+                $minDistance = $distance;
+                $closestMatch = $area['area']->name;
+            }
+        }
+        return $closestMatch;
     }
 }

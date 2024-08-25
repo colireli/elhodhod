@@ -257,7 +257,7 @@ class ShipmentController extends Controller
                         $model->type = 1;
                     }
 
-                    $model->to_area_id = Area::where('name' , $request->Shipment['to_area_id'])->where('state_id', $request->Shipment['to_state_id'])->pluck('id')->first();
+                    $model->to_area_id = Area::where('name' , ShipmentActionHelper::getClosestMatch($request->Shipment['to_area_id'],$userClient->id, $request->Shipment['to_state_id']))->where('state_id', $request->Shipment['to_state_id'])->pluck('id')->first();
                     if(!$model->to_area_id){
                         return  __('invalid area name') ;
                     }
@@ -885,7 +885,7 @@ class ShipmentController extends Controller
 
 
                         if($request->columns[$i] == 'to_area'){
-                            $new_shipment['to_area_id']  = Area::where('name' , $row[$i])->where('state_id', $row[$i-1])->pluck('id')->first();
+                            $new_shipment['to_area_id']  = Area::where('name' , ShipmentActionHelper::getClosestMatch($row[$i],$client->id, $row[$i-1]))->where('state_id', $row[$i-1])->pluck('id')->first();
                             if(!isset($new_shipment['to_area_id']) || empty($new_shipment['to_area_id'])){
 
                                 $error_message = __('invalid_area') ;
