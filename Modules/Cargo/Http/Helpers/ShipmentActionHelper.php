@@ -421,10 +421,9 @@ class ShipmentActionHelper{
         // Set an initial minimum distance and closest match
         $minDistance = null;
         $closestMatch = null;
-        //dd($areas['areas'][0]['area']['name']);
+        
         // Loop through each name in the database
         foreach ($areas['areas'] as $area) {
-           // dd($area->name);
             // Calculate the Levenshtein distance between the input and the current name
             $distance = levenshtein($inputName, $area['area']->name);
 

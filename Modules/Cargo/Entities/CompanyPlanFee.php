@@ -12,6 +12,8 @@ class CompanyPlanFee extends Model
     use HasFactory;
 
     protected $with = 'state:id,name';
+    protected $fillable = ['plan_id'];
+    
 
     /**
      * Get the state that owns the PlanFee

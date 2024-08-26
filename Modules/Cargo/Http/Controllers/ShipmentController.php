@@ -971,11 +971,10 @@ class ShipmentController extends Controller
 
             }
             if(count($coli_alert) > 0){
-                dd($error_message);
                 $suffix = 'error_' . now() . '_';
                 $xlsx_name = $suffix . strtolower($request->file('shipments_file')->getClientOriginalName());
                 return Excel::download(new CompanyPaymentExport($coli_alert, $request->columns), $xlsx_name);
-
+               // dd($error_message);
             }
             return redirect()->route('shipments.index')->with(['message_alert' => __('cargo::messages.created')]);
             // return back()->with(['message_alert' => __('cargo::messages.imported')]);
