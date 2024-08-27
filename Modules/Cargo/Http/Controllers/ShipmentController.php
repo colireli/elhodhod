@@ -947,6 +947,7 @@ class ShipmentController extends Controller
 
                     }
                     unset($new_shipment["to_area"]);
+                    unset($new_shipment["error_message"]);
                     // print_r($new_shipment);
                     // exit;
 
@@ -957,11 +958,13 @@ class ShipmentController extends Controller
 
                         $this->storeShipment($request);
                     }else{
+                        array_push($row,$error_message);
                         array_push($coli_alert, $row) ;
                       //	var_dump($error_message); die;
                     }
                 } catch(\Throwable $th) {
                     $error_message = $th->getMessage();
+                    array_push($row,$error_message);
                     array_push($coli_alert, $row) ;
                   //	var_dump($error_message); die;
                 }
@@ -973,6 +976,9 @@ class ShipmentController extends Controller
             if(count($coli_alert) > 0){
                 $suffix = 'error_' . now() . '_';
                 $xlsx_name = $suffix . strtolower($request->file('shipments_file')->getClientOriginalName());
+                array_push($request->columns,'error_message');
+               
+               
                 return Excel::download(new CompanyPaymentExport($coli_alert, $request->columns), $xlsx_name);
                // dd($error_message);
             }
