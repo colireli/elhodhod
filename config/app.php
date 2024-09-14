@@ -205,7 +205,8 @@ return [
 
         Barryvdh\Debugbar\ServiceProvider::class, // for debug
         Unicodeveloper\Paystack\PaystackServiceProvider::class,
-
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
 
     ],
 
@@ -272,6 +273,8 @@ return [
 
         'Debugbar' => Barryvdh\Debugbar\Facade::class, // for debug
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
     ],
 
 ];

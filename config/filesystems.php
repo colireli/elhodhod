@@ -64,6 +64,13 @@ return [
             'url' => env('APP_URL').'/storage/media',
         ],
 
+        'payments' => [
+            'driver' => 'local',
+            'root'   => storage_path('app/payments'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*

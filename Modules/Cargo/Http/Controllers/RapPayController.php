@@ -177,9 +177,12 @@ class RapPayController extends Controller
             }, $new);
         }
         $head = array_keys($new);
-        $suffix = $client->name . '_' . now() . '_';
+        $suffix = $client->name . '_' . str_replace(':', '', now()) . '_';
         $pdf_name = $suffix . Str::uuid()->toString() . '.pdf';
         $xlsx_name = $suffix . Str::uuid()->toString() . '.xlsx';
+        $xlsx_name = str_replace(' ', '', $xlsx_name);
+        $pdf_name = str_replace(' ', '', $pdf_name);
+
 
         try {
             DB::beginTransaction();
@@ -207,11 +210,12 @@ class RapPayController extends Controller
                 'paid_to_client'    => true,
                 'client_payment_id' => $payment->id,
             ]);
-
             if (!Excel::store(new CompanyPaymentExport($newData, $head), $xlsx_name, 'payments')) {
-                return redirect()->back()->with(['error_message_alert' => __('File can`t be stored')]);
-            }
 
+                return redirect()->back()->with(['error_message_alert' => __('File can`t be stored')]);
+
+            }
+            
             $xls_file = storage_path('app/payments/') . $xlsx_name;
             $adminTheme = env('ADMIN_THEME', 'adminLte');
             $pdf = Pdf::loadView(
@@ -238,6 +242,7 @@ class RapPayController extends Controller
             $pdf_file = storage_path('app/payments/') . $pdf_name;
             DB::commit();
         } catch (\Throwable $th) {
+            
             DB::rollback();
             if (Storage::disk('payments')->exists($xlsx_name)) {
                 Storage::disk('payments')->delete($xlsx_name);
@@ -245,7 +250,8 @@ class RapPayController extends Controller
             if (Storage::disk('payments')->exists($pdf_name)) {
                 Storage::disk('payments')->delete($pdf_name);
             }
-            return redirect()->back()->with(['error_message_alert' => __('Something went wrong when updating data!')]);
+            dd($th->getMessage());
+            return redirect()->back()->with(['error_message_alert' => __('Something went wrong when updating data! ')]);
         }
 
         $zip = new ZipArchive();
