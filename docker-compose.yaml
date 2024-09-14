@@ -9,9 +9,6 @@ services:
       - ./:/var/www/html
     networks:
       - web
-    depends_on:
-      - db
-
 
   webserver:
     image: nginx:alpine
@@ -24,9 +21,6 @@ services:
       - app
     labels:
       - "traefik.enable=false"
-
-volumes:
-  dbdata:
 
 networks:
   web:
