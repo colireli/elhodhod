@@ -1,27 +1,14 @@
 version: '3.8'
 
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - ./:/var/www/html
-    networks:
-      - web
-
-  webserver:
-    image: nginx:alpine
-    volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./:/var/www/html
-    networks:
-      - web
-    depends_on:
-      - app
-    labels:
-      - "traefik.enable=false"
-
-networks:
   web:
-    driver: bridge
+    image: app-name:latest
+    build:
+      target: web
+      context: .
+    env_file:
+      - .env
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
