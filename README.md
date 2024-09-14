@@ -7,12 +7,12 @@ Algoriza Framework Description.
 
 ### Clone Repository
 ```bash
-git clone https://github.com/ourcoteam/fr.git
+git clone https://github.com/colireli/elhodhod.git
 ```
 
 ### Move to the newly created directory
 ```bash
-cd fr
+cd elhodhod
 ```
 
 ### Create a new .env
