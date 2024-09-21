@@ -1,0 +1,21 @@
+{
+  "name": "sslwireless/sslwireless-sms",
+  "type": "library",
+  "description": "A simple php wrapper for sslwireless sms api.",
+  "keywords": ["php", "laravel", "sslwireless", "sms", "api-wrapper"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Rahul Haque",
+      "email": "rahulhaque07@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "SslWireless\\": "src/"
+    }
+  }
+}
