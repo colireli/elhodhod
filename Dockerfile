@@ -39,7 +39,7 @@ RUN a2enmod rewrite
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copy composer files and install dependencies
-COPY app/composer.json app/composer.lock ./
+COPY composer.json composer.lock ./
 
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html
@@ -48,7 +48,7 @@ RUN chown -R www-data:www-data /var/www/html
 RUN composer install --no-interaction --optimize-autoloader --prefer-dist --verbose
 
 # Copy application files
-COPY app/ /var/www/html
+COPY . /var/www/html
 
 # Ensure storage and cache directories exist
 RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache
