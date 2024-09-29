@@ -38,23 +38,24 @@ RUN a2enmod rewrite
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy composer files and install dependencies
+# Copy composer files and app code
 COPY composer.json composer.lock ./
+COPY . /var/www/html
 
-# Set proper permissions
+# Verify that composer.json exists
+RUN ls -la
+
+# Set permissions
 RUN chown -R www-data:www-data /var/www/html
+
+# Switch to www-data user
+USER www-data
 
 # Install PHP dependencies
 RUN composer install --no-interaction --optimize-autoloader --prefer-dist --verbose
 
-# Copy application files
-COPY . /var/www/html
-
-# Ensure storage and cache directories exist
-RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache
-
-# Set permissions for storage and cache
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Switch back to root user
+USER root
 
 # Generate application key
 RUN php artisan key:generate
