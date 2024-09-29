@@ -4,7 +4,7 @@ FROM php:8.1-apache
 # Set working directory
 WORKDIR /var/www/html
 
-# Install system dependencies
+# Install system dependencies and PHP extensions
 RUN apt-get update && apt-get install -y \
     git \
     zip \
@@ -14,14 +14,38 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    curl \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+    libcurl4-openssl-dev \
+    libicu-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) \
+        bcmath \
+        exif \
+        gd \
+        intl \
+        mbstring \
+        pcntl \
+        pdo_mysql \
+        xml \
+        zip \
+        curl
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Copy composer files and install dependencies
+COPY app/composer.json app/composer.lock ./
+
+# Set proper permissions
+RUN chown -R www-data:www-data /var/www/html
+
+# Install PHP dependencies
+RUN composer install --no-interaction --optimize-autoloader --prefer-dist --verbose
 
 # Copy application files
 COPY app/ /var/www/html
@@ -31,9 +55,6 @@ RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Set permissions for storage and cache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
-# Install PHP dependencies
-RUN composer install --no-interaction --optimize-autoloader
 
 # Generate application key
 RUN php artisan key:generate
