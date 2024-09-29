@@ -26,6 +26,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Copy application files
 COPY app/ /var/www/html
 
+# Ensure storage and cache directories exist
+RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache
+
 # Set permissions for storage and cache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
