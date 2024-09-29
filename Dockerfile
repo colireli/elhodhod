@@ -1,37 +1,46 @@
-# Use PHP with Apache as the base image
-FROM php:8.2-apache as web
+# Use the official PHP image with Apache
+FROM php:8.1-apache
 
-# Install Additional System Dependencies
-RUN apt-get update && apt-get install -y \
-    libzip-dev \
-    zip
-
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Enable Apache mod_rewrite for URL rewriting
-RUN a2enmod rewrite
-
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql zip
-
-# Configure Apache DocumentRoot to point to Laravel's public directory
-# and update Apache configuration files
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-
-# Copy the application code
-COPY . /var/www/html
-
-# Set the working directory
+# Set working directory
 WORKDIR /var/www/html
 
-# Install composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    zip \
+    unzip \
+    libpq-dev \
+    libzip-dev \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    curl \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Install project dependencies
-RUN composer install
+# Enable Apache mod_rewrite
+RUN a2enmod rewrite
 
-# Set permissions
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Copy application files
+COPY app/ /var/www/html
+
+# Set permissions for storage and cache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Install PHP dependencies
+RUN composer install --no-interaction --optimize-autoloader
+
+# Generate application key
+RUN php artisan key:generate
+
+# Copy entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# Set entrypoint
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+# Expose port 80
+EXPOSE 80
