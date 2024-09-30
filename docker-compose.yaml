@@ -11,7 +11,7 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - ./app:/var/www/html
+      - .:/var/www/html
       - ./docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh
     depends_on:
       - db
