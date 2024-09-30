@@ -1,3 +1,8 @@
+
+[submodule "elhodhod"]
+  path = elhodhod
+  url = https://github.com/colireli/elhodhod.git
+
 [submodule "vendor/mpdf/mpdf"]
   path = vendor/mpdf/mpdf
-  url = https://github.com/mpdf/mpdf.git
+  url = https://github.com/colireli/elhodhod.git
