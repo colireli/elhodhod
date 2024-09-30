@@ -35,17 +35,7 @@ RUN apt-get update && apt-get install -y \
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Copy composer files and packages
-COPY composer.json composer.lock ./
-COPY prePackages/ ./prePackages/
-
-# Install PHP dependencies
-RUN composer install --no-interaction --optimize-autoloader --prefer-dist --verbose
-
-# Copy application files
+# Copy the entire application code
 COPY . /var/www/html
 
 # Set permissions for storage and cache directories
