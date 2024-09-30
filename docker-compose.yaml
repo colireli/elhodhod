@@ -9,7 +9,7 @@ services:
     container_name: laravel_app
     restart: unless-stopped
     ports:
-      - "8000:80"
+      - "80:80"
     volumes:
       - ./app:/var/www/html
       - ./docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh
