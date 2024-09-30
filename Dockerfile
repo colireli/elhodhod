@@ -35,12 +35,15 @@ RUN apt-get update && apt-get install -y \
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
+    RUN apt-get install -y nodejs
 # Copy the entire application code
 COPY . /var/www/html
 
 # Set permissions for storage and cache directories
 # RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
+RUN npm install
+RUN npm run build
 # Generate application key
 #RUN php artisan key:generate
 
