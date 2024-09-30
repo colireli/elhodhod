@@ -42,7 +42,7 @@ COPY . /var/www/html
 # RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Generate application key
-RUN php artisan key:generate
+#RUN php artisan key:generate
 
 # Copy entrypoint script
 COPY docker-entrypoint.sh /usr/local/bin/
