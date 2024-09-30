@@ -39,7 +39,7 @@ RUN a2enmod rewrite
 COPY . /var/www/html
 
 # Set permissions for storage and cache directories
-RUN chown -R  /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html/storage
 
 # Generate application key
 RUN php artisan key:generate
