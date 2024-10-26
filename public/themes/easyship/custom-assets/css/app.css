@@ -269,22 +269,18 @@ p.text {
     font-size: 2.8125rem;
     line-height: 3.25rem;
   }
-
   h2.heading {
     font-size: 2.8125rem;
     line-height: 3.25rem;
   }
-
   h2.title {
     font-size: 1.875rem;
     line-height: 2.5rem;
   }
-
   h3.heading, h3.title {
     font-size: 1.875rem;
     line-height: 2.5rem;
   }
-
   p.sub, p.text {
     font-size: 1.125rem;
     line-height: 1.75rem;
@@ -441,7 +437,6 @@ html {
   height: 100%;
   width: 56px;
   font-size: 1rem;
-  display: -ms-grid;
   display: grid;
   place-items: center;
   transition: box-shadow 0.2s ease-in-out;
@@ -583,7 +578,6 @@ html {
 }
 
 #main-header {
-  position: -webkit-sticky;
   position: sticky;
   top: 0px;
   width: 100%;
@@ -784,7 +778,6 @@ html {
 #banner .wrapper {
   margin: 0 0 15px;
   height: 320px;
-  -ms-grid-row-align: center;
   align-self: center;
 }
 
@@ -1210,16 +1203,13 @@ html {
   #main-footer .footer {
     width: auto;
   }
-
   #main-footer .footer-form .form-control {
     -webkit-margin-end: 10px;
     margin-inline-end: 10px;
   }
-
   #main-footer .footer-form > div {
     flex-wrap: nowrap !important;
   }
-
   #main-footer .footer-form .btn {
     width: auto !important;
   }
@@ -1228,7 +1218,6 @@ html {
   .typer {
     min-height: 52px;
   }
-
   .section > .wrapper {
     position: absolute;
     top: 0;
@@ -1239,41 +1228,33 @@ html {
     justify-content: center;
     align-items: center;
   }
-
   .section > .wrapper .graphic {
     margin: 0 -170px 0 0;
     width: auto;
     height: 100%;
   }
-
   .section .intro {
     -webkit-margin-end: 0;
     margin-inline-end: 0;
   }
-
   .section .container .contents .wrapper {
     margin: 0;
   }
-
   .section .container .contents .wrapper .graphic {
     height: 370px;
     width: auto;
   }
-
   a.link {
     font-weight: 700;
   }
-
   #main-header .navbar .container {
     margin: 0 auto;
     width: 640px;
     padding: 0;
   }
-
   #main-header .navbar .logo {
     padding: 20px 0;
   }
-
   #main-header .navbar .nav-list li a.dropdown-toggle {
     display: inline-block;
     padding: 1.625rem 0;
@@ -1281,11 +1262,9 @@ html {
     height: auto;
     border-bottom: 0;
   }
-
   #main-header .navbar .mobile-items {
     padding: 20px 0;
   }
-
   #main-header .navbar .mobile-items a.btn {
     padding: 0 2.1875rem;
     min-height: 2.5rem;
@@ -1294,7 +1273,6 @@ html {
     line-height: 2.5rem;
     font-weight: 400;
   }
-
   #banner .container {
     margin: 0 auto;
     padding: 90px 0 125px;
@@ -1303,22 +1281,18 @@ html {
     position: relative;
     flex-direction: row;
   }
-
   #banner .intro {
     padding: 45px 0 0;
     width: 405px;
     display: block;
   }
-
   #banner .intro .sub {
     max-width: 90%;
   }
-
   #banner .btn {
     order: unset;
     width: auto;
   }
-
   #banner .wrapper {
     margin: 0;
     height: 490px;
@@ -1326,66 +1300,52 @@ html {
     top: 30px;
     inset-inline-end: -305px;
   }
-
   #supercharge::before {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 98%);
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 98%);
   }
-
   #supercharge .container {
     margin: 0 auto;
     padding: 0 0 200px;
     width: 640px;
   }
-
   #supercharge .intro {
     text-align: center;
   }
-
   #supercharge .contents .row:nth-child(even) {
     flex-direction: row-reverse;
   }
-
   #supercharge .contents .row .graphic {
     width: 100% !important;
   }
-
   #supercharge .contents .row a {
     font-weight: bold;
   }
-
   #business {
     margin: -100px 50px 0;
     padding: 175px 0 120px;
   }
-
   #business .intro {
     text-align: center;
   }
-
   #business .accordion .card .header {
     margin: 0;
   }
-
   #business .accordion .card .body {
     display: flex;
     flex-direction: column-reverse;
   }
-
   #business .accordion .card .body .text {
     margin: 0;
     padding-top: 0;
   }
-
   #business .accordion .card .body .text a {
     font-weight: 700;
   }
-
   #case-studies {
     height: 280px;
     flex-flow: column wrap;
   }
-
   #case-studies .banner {
     margin: -20px 0;
     padding: 45px 30px;
@@ -1396,68 +1356,54 @@ html {
     text-align: start;
     order: 3;
   }
-
   #case-studies .cases .case {
     width: auto;
     height: 50%;
   }
-
   #case-studies .cases .case .bg {
     width: calc(50vw - 165px);
     height: 100%;
   }
-
   #case-studies .testimonials {
     display: none;
   }
-
   #good-hands::before {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
     clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   }
-
   #good-hands .container {
     margin: 0 auto;
     padding: 110px 0 200px;
     width: 640px;
   }
-
   #good-hands .intro {
     text-align: center;
   }
-
   #good-hands .contents a {
     font-weight: 700;
   }
-
   #start-shipping .container {
     margin: 0 auto;
     padding: 195px 180px 95px 0;
     width: 640px;
   }
-
   #main-footer .footer-cols {
     padding-top: 50px;
     padding-bottom: 50px;
   }
-
   #main-footer .footer-cols .main-col {
     padding-bottom: 50px;
   }
-
   .overlay {
     background-color: rgba(0, 0, 0, 0.2);
   }
-
   .drawer {
     width: 50%;
   }
-
   .drawer .header {
     min-height: 80px;
     height: 80px;
   }
-
   .drawer .header #nav-close {
     padding: 30px 35px !important;
     width: auto;
@@ -1468,7 +1414,6 @@ html {
   .section > .wrapper .graphic {
     margin: 0 -60px 0 0;
   }
-
   .section .container .contents .wrapper {
     margin: 0 60px 0 0;
     position: absolute;
@@ -1477,39 +1422,32 @@ html {
     bottom: 120px;
     justify-content: flex-end;
   }
-
   .section .container .contents .wrapper .graphic {
     height: 100%;
     display: none;
   }
-
   .section .container .contents .wrapper .graphic.lg {
     display: block;
   }
-
   a,
-.link,
-a.link {
+  .link,
+  a.link {
     font-size: 1.125rem;
     line-height: 1.75rem;
     font-weight: 700;
   }
-
   #main-header .navbar .container {
     width: 100%;
     max-width: 960px;
   }
-
   #banner .container {
     padding: 100px 0 125px;
     width: 960px;
   }
-
   #banner .intro {
     width: 475px;
     max-width: 500px;
   }
-
   #banner .wrapper {
     margin: 0;
     width: 830px;
@@ -1518,25 +1456,20 @@ a.link {
     top: 30px;
     inset-inline-end: -280px;
   }
-
   #supercharge::before {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 96%);
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 96%);
   }
-
   #supercharge .container {
     padding: 0 0 130px;
     width: 960px;
   }
-
   #supercharge .contents .row {
     margin-bottom: 100px;
   }
-
   #supercharge .info {
     padding-inline: 20px;
   }
-
   #business {
     margin: -280px auto 0;
     padding: 330px 0 120px;
@@ -1544,100 +1477,79 @@ a.link {
     position: static;
     overflow: visible;
   }
-
   #business .accordion {
     position: relative;
   }
-
   #business .accordion .card {
     max-width: 50%;
     overflow: visible !important;
     position: static;
   }
-
   #business .accordion .card .header {
     margin-inline: 0;
     padding-block: 30px;
   }
-
   #business .accordion .card .btn .heading {
     font-weight: 400 !important;
   }
-
   #business .accordion .card .collapse .body .image.lg {
     display: none;
   }
-
   #business .accordion .card .collapse.show .body .image.lg {
     display: block;
   }
-
   #business .accordion .card .body .image {
     display: none;
   }
-
   #business .accordion .card .body .image.lg {
     width: 720px;
     position: absolute;
     top: 0;
     inset-inline-end: -280px;
   }
-
   #business .accordion .card .body .text {
     margin: 0;
   }
-
   #case-studies .banner {
     padding: 45px 60px;
     width: 373px;
     order: 7;
   }
-
   #case-studies .cases .case {
     max-height: 140px;
   }
-
   #case-studies .cases .case .bg {
     width: calc(25vw - 97px);
   }
-
   #case-studies .testimonials {
     display: flex;
   }
-
   #case-studies .testimonials .link {
     font-size: 1.375rem;
     line-height: 2.5rem;
   }
-
   #good-hands:before {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
     clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
   }
-
   #good-hands .container {
     padding: 165px 0 320px 500px;
     width: 960px;
     position: relative;
   }
-
   #good-hands .wrapper {
     margin-bottom: 0;
   }
-
   #start-shipping {
     margin-top: -240px;
   }
-
   #start-shipping .container {
     padding: 270px 500px 100px 0;
     width: 960px;
   }
-
   #main-footer .footer-cols .col-list {
     margin-bottom: 0;
   }
-
   /* dropdowns */
   .dropdown-menu .dropdown-toggle:after {
     border-top: 0.3em solid transparent;
@@ -1645,23 +1557,19 @@ a.link {
     border-bottom: 0.3em solid transparent;
     border-left: 0.3em solid;
   }
-
   .dropdown-menu .dropdown-menu {
     margin-left: 0;
     margin-right: 0;
   }
-
   .dropdown-menu li {
     position: relative;
   }
-
   .nav-item .submenu {
     display: none;
     position: absolute;
     left: 100%;
     top: -7px;
   }
-
   .nav-item .submenu-left {
     right: 100%;
     left: auto;
@@ -1671,7 +1579,6 @@ a.link {
   #main-header .navbar .container {
     max-width: 1160px;
   }
-
   #main-footer .footer-cols .main-col {
     -webkit-padding-end: 60px;
     padding-inline-end: 60px;
@@ -1680,20 +1587,16 @@ a.link {
     text-align: start;
     border-bottom: 0;
   }
-
   #main-footer .footer-cols .col-list {
     margin-bottom: 0;
   }
-
   #main-footer .footer-form {
     width: 100%;
     margin-bottom: 50px;
   }
-
   #main-footer .footer-form > div {
     flex-wrap: nowrap;
   }
-
   #main-footer .footer-bottom {
     flex-direction: row;
     justify-content: space-between;

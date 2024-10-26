@@ -2061,9 +2061,8 @@ module.exports = {
 /***/ (() => {
 
 var classCardPermissions = '.card-permissions',
-    classCheckboxPermission = '.select-single-permission',
-    classCheckboxGroup = '.select-all-groups';
-
+  classCheckboxPermission = '.select-single-permission',
+  classCheckboxGroup = '.select-all-groups';
 function checkSelected(cardPermissions) {
   var selected = [];
   cardPermissions.find(classCheckboxPermission).each(function (i, e) {
@@ -2073,7 +2072,6 @@ function checkSelected(cardPermissions) {
   });
   return selected.length == cardPermissions.find(classCheckboxPermission).length;
 }
-
 function toggleSelectAll(cardPermissions) {
   var checkboxAllGroup = cardPermissions.find(classCheckboxGroup);
   setTimeout(function () {
@@ -2083,16 +2081,15 @@ function toggleSelectAll(cardPermissions) {
       checkboxAllGroup.prop('checked', false);
     }
   });
-} // choose all rows
+}
 
-
+// choose all rows
 $(classCardPermissions).find(classCheckboxGroup).on('change', function (e) {
   var self = $(this),
-      selectedAll = self[0].checked,
-      cardPermissions = self.parents(classCardPermissions),
-      checkBoxPermissionNotSelected = cardPermissions.find(classCheckboxPermission + ':not(:checked)'),
-      checkBoxPermissionSelected = cardPermissions.find(classCheckboxPermission + ':checked');
-
+    selectedAll = self[0].checked,
+    cardPermissions = self.parents(classCardPermissions),
+    checkBoxPermissionNotSelected = cardPermissions.find(classCheckboxPermission + ':not(:checked)'),
+    checkBoxPermissionSelected = cardPermissions.find(classCheckboxPermission + ':checked');
   if (selectedAll) {
     // toggle not seleced only
     checkBoxPermissionNotSelected.click();
@@ -2100,8 +2097,9 @@ $(classCardPermissions).find(classCheckboxGroup).on('change', function (e) {
     // toggle selected only
     checkBoxPermissionSelected.click();
   }
-}); // choose one row
+});
 
+// choose one row
 $(classCardPermissions).find(classCheckboxPermission).on('change', function (e) {
   var cardPermissions = $(this).parents(classCardPermissions);
   toggleSelectAll(cardPermissions);
@@ -2116,55 +2114,53 @@ $(classCardPermissions).find(classCheckboxPermission).on('change', function (e) 
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 // setup js
-__webpack_require__(/*! ./setup */ "./resources/assets/global/js/setup.js"); // global js
+__webpack_require__(/*! ./setup */ "./resources/assets/global/js/setup.js");
 
+// global js
+__webpack_require__(/*! ./global */ "./resources/assets/global/js/global.js");
 
-__webpack_require__(/*! ./global */ "./resources/assets/global/js/global.js"); // axios config
+// axios config
+__webpack_require__(/*! ./axios */ "./resources/assets/global/js/axios.js");
 
+// sweetalert config
+__webpack_require__(/*! ./sweetalert */ "./resources/assets/global/js/sweetalert.js");
 
-__webpack_require__(/*! ./axios */ "./resources/assets/global/js/axios.js"); // sweetalert config
+// Trigger plugins
+__webpack_require__(/*! ./trigger-plugins */ "./resources/assets/global/js/trigger-plugins.js");
 
+// logout form
+__webpack_require__(/*! ./logout */ "./resources/assets/global/js/logout.js");
 
-__webpack_require__(/*! ./sweetalert */ "./resources/assets/global/js/sweetalert.js"); // Trigger plugins
+// roles and permissions
+__webpack_require__(/*! ./acl */ "./resources/assets/global/js/acl.js");
 
+// setting module
+__webpack_require__(/*! ./setting_module */ "./resources/assets/global/js/setting_module.js");
 
-__webpack_require__(/*! ./trigger-plugins */ "./resources/assets/global/js/trigger-plugins.js"); // logout form
+// Delete row from any datatable
+__webpack_require__(/*! ./datatables/delete_row */ "./resources/assets/global/js/datatables/delete_row.js");
 
+// Approve or Reject row from any datatable
+__webpack_require__(/*! ./datatables/approval_row */ "./resources/assets/global/js/datatables/approval_row.js");
 
-__webpack_require__(/*! ./logout */ "./resources/assets/global/js/logout.js"); // roles and permissions
+// Datatable execute code for all tables
+__webpack_require__(/*! ./datatables/datatable */ "./resources/assets/global/js/datatables/datatable.js");
 
+// manage show and hide fields of translation in database
+__webpack_require__(/*! ./forms/translate_form */ "./resources/assets/global/js/forms/translate_form.js");
 
-__webpack_require__(/*! ./acl */ "./resources/assets/global/js/acl.js"); // setting module
+// manage show and hide fields of translation in database
+__webpack_require__(/*! ./forms/slug */ "./resources/assets/global/js/forms/slug.js");
 
-
-__webpack_require__(/*! ./setting_module */ "./resources/assets/global/js/setting_module.js"); // Delete row from any datatable
-
-
-__webpack_require__(/*! ./datatables/delete_row */ "./resources/assets/global/js/datatables/delete_row.js"); // Approve or Reject row from any datatable
-
-
-__webpack_require__(/*! ./datatables/approval_row */ "./resources/assets/global/js/datatables/approval_row.js"); // Datatable execute code for all tables
-
-
-__webpack_require__(/*! ./datatables/datatable */ "./resources/assets/global/js/datatables/datatable.js"); // manage show and hide fields of translation in database
-
-
-__webpack_require__(/*! ./forms/translate_form */ "./resources/assets/global/js/forms/translate_form.js"); // manage show and hide fields of translation in database
-
-
-__webpack_require__(/*! ./forms/slug */ "./resources/assets/global/js/forms/slug.js"); // watch inputs
-
-
+// watch inputs
 __webpack_require__(/*! ./forms/watch_input */ "./resources/assets/global/js/forms/watch_input.js");
+__webpack_require__(/*! ./theme_setting */ "./resources/assets/global/js/theme_setting.js");
 
-__webpack_require__(/*! ./theme_setting */ "./resources/assets/global/js/theme_setting.js"); // toggle tabs
-
-
+// toggle tabs
 $('.children-setting-navs .btn-child').on('click', function (e) {
   e.preventDefault();
   var self = $(this),
-      slug = self.data('slug');
-
+    slug = self.data('slug');
   if (!self.hasClass('active')) {
     self.addClass('active').parent('.nav-item').siblings().children('.btn-child').removeClass('active');
     $('.wrapper-settings .child-setting-form').filter("[data-slug=\"".concat(slug, "\"]")).fadeIn(250).siblings().fadeOut(250);
@@ -2197,20 +2193,19 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 $('body').on('click', '.btn-single-action', function (e) {
   var _self$data;
-
   e.preventDefault();
   var self = $(this),
-      url = self.data('url'),
-      action = self.data('action'),
-      callback = self.data('callback'),
-      modelName = self.data('model-name'),
-      modalMessage = self.data('modal-message'),
-      modalAction = self.data('modal-action'),
-      tableId = self.data('table-id'),
-      requestDataParent = $("#".concat(tableId, "_selected_component")).attr('data-request-data'),
-      requestDataSelf = self.attr('data-request-data'),
-      multiRows = self.data('multi-rows'),
-      timeAlert = (_self$data = self.data('time-alert')) !== null && _self$data !== void 0 ? _self$data : _timerAlert;
+    url = self.data('url'),
+    action = self.data('action'),
+    callback = self.data('callback'),
+    modelName = self.data('model-name'),
+    modalMessage = self.data('modal-message'),
+    modalAction = self.data('modal-action'),
+    tableId = self.data('table-id'),
+    requestDataParent = $("#".concat(tableId, "_selected_component")).attr('data-request-data'),
+    requestDataSelf = self.attr('data-request-data'),
+    multiRows = self.data('multi-rows'),
+    timeAlert = (_self$data = self.data('time-alert')) !== null && _self$data !== void 0 ? _self$data : _timerAlert;
   Swal.fire({
     title: "".concat(modalAction, " ").concat(modelName, "!"),
     'text': "".concat(modalMessage, " ").concat(modelName, "?"),
@@ -2231,15 +2226,14 @@ $('body').on('click', '.btn-single-action', function (e) {
         multi: multiRows && multiRows == true,
         action: action,
         _token: _csrf_token
-      }; // ajax delete
-
+      };
+      // ajax delete
       axios.post(url, data).then(function (res) {
         Toast.fire({
           icon: 'success',
           title: res.data.message ? res.data.message : "".concat(modelName, " has been updated successfully"),
           timer: timeAlert
         });
-
         if (callback == 'reload-page') {
           setTimeout(function () {
             window.location.reload();
@@ -2252,14 +2246,14 @@ $('body').on('click', '.btn-single-action', function (e) {
           row.fadeOut(400, function () {
             $(this).remove();
           });
-        } // only for multi delete
+        }
+
+        // only for multi delete
         // show filter and hide action (delete button)
-
-
         if (multiRows && multiRows == true) {
           var actions = $("#".concat(tableId, "_selected_component")),
-              filter = $("#".concat(tableId, "_custom_filter")),
-              checkboxAllRows = $("#".concat(tableId, "_wrapper .checkbox-all-rows"));
+            filter = $("#".concat(tableId, "_custom_filter")),
+            checkboxAllRows = $("#".concat(tableId, "_wrapper .checkbox-all-rows"));
           actions.addClass('d-none');
           filter.removeClass('d-none');
           checkboxAllRows.prop('checked', false);
@@ -2310,10 +2304,11 @@ $('body').on('click', '.btn-single-action', function (e) {
 /***/ (() => {
 
 // active buttons export table
+
 $('body').on('click', '.buttons-export-table .dropdown-menu .btn-export', function () {
   var typeExport = $(this).data('export'),
-      table_id = $(this).data('table-id'),
-      wrapperTable = $("#".concat(table_id, "_wrapper"));
+    table_id = $(this).data('table-id'),
+    wrapperTable = $("#".concat(table_id, "_wrapper"));
   wrapperTable.find(".buttons-".concat(typeExport)).click();
 });
 
@@ -2330,18 +2325,17 @@ $('body').on('click', '.buttons-export-table .dropdown-menu .btn-export', functi
 
 $('body').on('click', '.delete-row', function (e) {
   var _self$data;
-
   e.preventDefault();
   var self = $(this),
-      url = self.data('action'),
-      callback = self.data('callback'),
-      modelName = self.data('model-name'),
-      modalMessage = self.data('modal-message'),
-      modalAction = self.data('modal-action'),
-      tableId = self.data('table-id'),
-      requestData = self.attr('data-request-data'),
-      multiDelete = self.data('multi-delete'),
-      timeAlert = (_self$data = self.data('time-alert')) !== null && _self$data !== void 0 ? _self$data : _timerAlert;
+    url = self.data('action'),
+    callback = self.data('callback'),
+    modelName = self.data('model-name'),
+    modalMessage = self.data('modal-message'),
+    modalAction = self.data('modal-action'),
+    tableId = self.data('table-id'),
+    requestData = self.attr('data-request-data'),
+    multiDelete = self.data('multi-delete'),
+    timeAlert = (_self$data = self.data('time-alert')) !== null && _self$data !== void 0 ? _self$data : _timerAlert;
   Swal.fire({
     title: "".concat(modalAction, " ").concat(modelName, "!"),
     'text': "".concat(modalMessage, " ").concat(modelName, "?"),
@@ -2364,15 +2358,14 @@ $('body').on('click', '.delete-row', function (e) {
       };
       Object.assign(data, {
         _token: _csrf_token
-      }); // ajax delete
-
+      });
+      // ajax delete
       axios["delete"](url, data).then(function (res) {
         Toast.fire({
           icon: 'success',
           title: res.data.message ? res.data.message : "".concat(modelName, " has been deleted successfully"),
           timer: timeAlert
         });
-
         if (callback == 'reload-page') {
           setTimeout(function () {
             window.location.reload();
@@ -2385,14 +2378,14 @@ $('body').on('click', '.delete-row', function (e) {
           row.fadeOut(400, function () {
             $(this).remove();
           });
-        } // only for multi delete
+        }
+
+        // only for multi delete
         // show filter and hide action (delete button)
-
-
         if (multiDelete && multiDelete == true) {
           var actions = $("#".concat(tableId, "_selected_component")),
-              filter = $("#".concat(tableId, "_custom_filter")),
-              checkboxAllRows = $("#".concat(tableId, "_wrapper .checkbox-all-rows"));
+            filter = $("#".concat(tableId, "_custom_filter")),
+            checkboxAllRows = $("#".concat(tableId, "_wrapper .checkbox-all-rows"));
           actions.addClass('d-none');
           filter.removeClass('d-none');
           checkboxAllRows.prop('checked', false);
@@ -2445,24 +2438,20 @@ $('body').on('click', '.delete-row', function (e) {
 $(window).on('load', function () {
   var slugContent = $('[data-slug-content]');
   var slugInject = $('[data-slug-inject]');
-
   if (slugContent) {
     slugContent.on('input', function () {
       var self = $(this),
-          value = self.val(),
-          slugName = self.data('slug-content'),
-          getSlugInject = $("[data-slug-inject=\"".concat(slugName, "\"]"));
-
+        value = self.val(),
+        slugName = self.data('slug-content'),
+        getSlugInject = $("[data-slug-inject=\"".concat(slugName, "\"]"));
       if (!getSlugInject.hasClass('edited')) {
         getSlugInject.val(slug(value));
       }
     });
   }
-
   if (slugInject) {
     slugInject.on('input', function () {
       var self = $(this);
-
       if (!self.hasClass('edited')) {
         self.addClass('edited');
       }
@@ -2479,20 +2468,18 @@ $(window).on('load', function () {
 /***/ (() => {
 
 var classBtnShowTranslateFields = '.btn-show-translate-fields',
-    classTranslateLabel = '.translate-label',
-    classTranslateField = '.translate-field',
-    classTranslateInput = '.translate-input',
-    hashName = '#translation';
+  classTranslateLabel = '.translate-label',
+  classTranslateField = '.translate-field',
+  classTranslateInput = '.translate-input',
+  hashName = '#translation';
 $(window).on('load', function () {
   var location = window.location,
-      translateInput = $(classTranslateInput);
-
+    translateInput = $(classTranslateInput);
   if (location.hash == hashName) {
     toggleTranslationFields();
     translateInput.addClass('show-fields');
     translateInput.val('true');
   }
-
   setTimeout(function () {
     if ($(classTranslateInput).hasClass('show-fields')) {
       toggleTranslationFields();
@@ -2501,8 +2488,7 @@ $(window).on('load', function () {
 });
 $(classBtnShowTranslateFields).on('click', function (e) {
   var location = window.location,
-      translateInput = $(classTranslateInput);
-
+    translateInput = $(classTranslateInput);
   if (translateInput.val() == 'true' || location.hash == hashName) {
     window.history.pushState(null, null, ' ');
     toggleTranslationFields('hide', 'slide');
@@ -2512,20 +2498,19 @@ $(classBtnShowTranslateFields).on('click', function (e) {
     toggleTranslationFields('show', 'slide');
     translateInput.val('true');
   }
-}); // toggle show / hide fields
+});
 
+// toggle show / hide fields
 function toggleTranslationFields() {
   var status = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'show';
   var animation = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'fixed';
   var selectEle = $(classTranslateField + ',' + classTranslateLabel);
-
   if (status == 'show') {
     if (animation == 'slide') {
       selectEle.slideDown(300);
     } else if (animation == 'fixed') {
       selectEle.show();
     }
-
     $(classBtnShowTranslateFields).find('.text-toggle').removeClass('hide');
   } else if (status == 'hide') {
     if (animation == 'slide') {
@@ -2533,7 +2518,6 @@ function toggleTranslationFields() {
     } else if (animation == 'fixed') {
       selectEle.hide();
     }
-
     $(classBtnShowTranslateFields).find('.text-toggle').addClass('hide');
   }
 }
@@ -2549,15 +2533,13 @@ function toggleTranslationFields() {
 $(window).on('load', function () {
   var modelContent = $('[data-model]');
   var modelInject = $('[data-model-inject]');
-
   if (modelContent) {
     modelContent.on('input', function () {
       var self = $(this),
-          value = self.val(),
-          modelName = self.data('model'),
-          limit = self.data('model-limit'),
-          getModelInject = $("[data-model-inject=\"".concat(modelName, "\"]"));
-
+        value = self.val(),
+        modelName = self.data('model'),
+        limit = self.data('model-limit'),
+        getModelInject = $("[data-model-inject=\"".concat(modelName, "\"]"));
       if (!getModelInject.hasClass('edited')) {
         if (limit) {
           getModelInject.val(value.substr(0, parseInt(limit)));
@@ -2567,11 +2549,9 @@ $(window).on('load', function () {
       }
     });
   }
-
   if (modelInject) {
     modelInject.on('input', function () {
       var self = $(this);
-
       if (!self.hasClass('edited')) {
         self.addClass('edited');
       }
@@ -2615,18 +2595,16 @@ formLogout.on('click', 'a', function (e) {
 /***/ (() => {
 
 var classWrapperArrayValue = '.wrapper-array-value',
-    classBtnAddItem = '.add-new-item-array .btn-add-item';
+  classBtnAddItem = '.add-new-item-array .btn-add-item';
 classBtnRemoveItem = '.wrapper-array-value .array-item .btn-remove-item';
-
 function newItem(field_key, placeholder) {
   return "\n        <div class=\"array-item d-flex mb-4\">\n            <div class=\"input w-100\">\n                <input\n                    type=\"text\"\n                    name=\"fields[".concat(field_key, "][]\"\n                    class=\"form-control form-control-lg\"\n                    placeholder=\"").concat(placeholder, "\"\n                    value=\"\"\n                >\n            </div>\n            <button type=\"button\" class=\"btn btn-active-light-danger btn-sm ms-2 btn-remove-item mh-45px\">\n                <i class=\"fas fa-times fs-3\"></i>\n            </button>\n        </div>\n    ");
 }
-
 $(classBtnAddItem).on('click', function () {
   var key = $(this).data('key'),
-      wrapperArrayValue = $(classWrapperArrayValue).filter("[data-key=\"".concat(key, "\"]")),
-      placeholder = wrapperArrayValue.data('placeholder'),
-      arrayItemLength = wrapperArrayValue.find('.array-item').length;
+    wrapperArrayValue = $(classWrapperArrayValue).filter("[data-key=\"".concat(key, "\"]")),
+    placeholder = wrapperArrayValue.data('placeholder'),
+    arrayItemLength = wrapperArrayValue.find('.array-item').length;
   placeholder = placeholder + ' ' + (arrayItemLength + 1);
   wrapperArrayValue.append(newItem(key, placeholder));
 });
@@ -2645,25 +2623,22 @@ $(document).on('click', classBtnRemoveItem, function () {
 
 var echo = console.log.bind(console, '>');
 window.echo = echo;
-
 function isJSON(str) {
   try {
     JSON.parse(str);
   } catch (e) {
     return false;
   }
-
   return true;
 }
+window.isJSON = isJSON;
 
-window.isJSON = isJSON; // slug plugin
-
+// slug plugin
 var slug = __webpack_require__(/*! slug */ "./node_modules/slug/slug.js");
+window.slug = slug;
 
-window.slug = slug; // slug plugin
-
+// slug plugin
 var Quill = __webpack_require__(/*! quill */ "./node_modules/quill/dist/quill.js");
-
 window.Quill = Quill;
 
 /***/ }),
@@ -2698,8 +2673,9 @@ window.Toast = Toast;
 
 var $trans = '';
 var $place = window.place;
-var timerHideNewSection = 2000; // toggle open according
+var timerHideNewSection = 2000;
 
+// toggle open according
 $('#tab_list .tab .tab-header').on('click', function () {
   var parent = $(this).parents('.tab');
   parent.toggleClass('opened');
@@ -2707,8 +2683,8 @@ $('#tab_list .tab .tab-header').on('click', function () {
   parent.find('.tab-icon').toggleClass('flip-icon');
 });
 /********************************************************************************/
-// toggle open sidebar
 
+// toggle open sidebar
 $(document).on('click', '.section-component:not(.container_section) > .section-component-header', function (e) {
   if (!$(e.target).parents('.section-component-control').length || $(e.target).hasClass('section-component-toggle') || $(e.target).hasClass('section-component-toggle-icon')) {
     var parent = $(this).parents('.section-component:not(.container_section)');
@@ -2731,46 +2707,50 @@ $('#containers .section-component.container_section').each(function (i) {
   }
 });
 /********************************************************************************/
-// open section list
 
+// open section list
 $(document).on('click', '.add_new_section_btn', function (e) {
   e.stopPropagation();
   var containerId = $(this).parents('.container_section').data('id');
   $('#section_class_list').attr('data-container-id', containerId).addClass('open');
-}); // close section list
+  window.livewire.rescan();
+});
 
+// close section list
 $('#section_class_list').on('click', function (e) {
   if ($(e.target).attr('id') == 'section_class_list') {
     $(this).removeClass('open');
   }
 });
 /********************************************************************************/
-// open widget list
 
+// open widget list
 $(document).on('click', '.add_new_widget_btn', function (e) {
   e.stopPropagation();
   var containerId = $(this).parents('.container_section').data('id');
   $('#widget_class_list').attr('data-container-id', containerId).addClass('open');
-}); // close widget list
+  window.livewire.rescan();
+});
 
+// close widget list
 $('#widget_class_list').on('click', function (e) {
   if ($(e.target).attr('id') == 'widget_class_list') {
     $(this).removeClass('open');
   }
 });
 /********************************************************************************/
-// add new container
 
+// add new container
 $('.add_new_container_btn').on('click', function (e) {
   e.stopPropagation();
   var containerId = 'container_id_' + Math.floor(Math.random() * 500000),
-      containers = $('#containers'),
-      childrenLength = containers.find('.container_section').length,
-      containerClone = $('.container_clone .container_section').clone();
+    containers = $('#containers'),
+    childrenLength = containers.find('.container_section').length,
+    containerClone = $('.container_clone .container_section').clone();
   containerClone.attr('data-id', containerId);
   containerClone.find('.section-component-header .title').text($trans.container + ' ' + (childrenLength + 1));
   containerClone.find('.container_width').each(function () {
-    $(this).attr('id', $(this).val()+'_'+containerId);
+    $(this).attr('id', $(this).val() + '_' + containerId);
   });
   $('.empty-containers').addClass('d-none');
   $('.hide-when-not-containers').removeClass('d-none');
@@ -2787,42 +2767,40 @@ $('.add_new_container_btn').on('click', function (e) {
     }, timerHideNewSection);
   }, 300);
 }); // search in section list
-// search in section list
 
+// search in section list
 $('#section_class_list .sections-search .sections-search-input').on('input', function (e) {
   e.preventDefault();
   var self = $(this),
-      searchValue = self.val().trim().toLowerCase(),
-      boxClass = '.section-list .section-box',
-      notMatchedSearch = $('#section_class_list').find(boxClass).filter(":not([data-title-search*=\"".concat(searchValue, "\"])")); // hide section box
+    searchValue = self.val().trim().toLowerCase(),
+    boxClass = '.section-list .section-box',
+    notMatchedSearch = $('#section_class_list').find(boxClass).filter(":not([data-title-search*=\"".concat(searchValue, "\"])"));
 
+  // hide section box
   $(boxClass).removeClass('hide-box'); // show all
-
   if (searchValue != '') {
     notMatchedSearch.addClass('hide-box'); // hide not matched only 
   }
 });
 /********************************************************************************/
-// search in widget list
 
+// search in widget list
 $('#widget_class_list .widgets-search .widgets-search-input').on('input', function (e) {
   e.preventDefault();
   var self = $(this),
-      searchValue = self.val().trim().toLowerCase(),
-      boxClass = '.widget-list .widget-box',
-      notMatchedSearch = $(boxClass).filter(":not([data-title-search*=\"".concat(searchValue, "\"])")); // hide widget box
+    searchValue = self.val().trim().toLowerCase(),
+    boxClass = '.widget-list .widget-box',
+    notMatchedSearch = $(boxClass).filter(":not([data-title-search*=\"".concat(searchValue, "\"])"));
 
+  // hide widget box
   $(boxClass).removeClass('hide-box'); // show all
-
   if (searchValue != '') {
     notMatchedSearch.addClass('hide-box'); // hide not matched only 
-  } // hide group title
-
-
+  }
+  // hide group title
   $('.widget-groups .widget-list').each(function () {
     var countChildren = $(this).find('.widget-box').length;
     var countBoxHide = $(this).find('.widget-box').filter('.hide-box').length;
-
     if (countChildren == countBoxHide) {
       $(this).prev('.group-title').addClass('hide-box');
     } else {
@@ -2831,30 +2809,24 @@ $('#widget_class_list .widgets-search .widgets-search-input').on('input', functi
   });
 });
 /********************************************************************************/
-// add new section
 
+// add new section
 $('#section_class_list .section-list .section-box').on('click', function (e) {
   var self = $(this),
-      containerId = self.parents('#section_class_list').attr('data-container-id'),
-      containerSelected = $('#containers .container_section').filter("[data-id=\"".concat(containerId, "\"]")),
-      sectionListSelected = containerSelected.find('.wrapper_section_list'),
-      dataForm = {
-    title: self.data('title'),
-    name: self.data('name'),
-    form: self.data('form')
-  },
-      sectionFormRendred = sectionForm(dataForm); // add section form
-
+    containerId = self.parents('#section_class_list').attr('data-container-id'),
+    containerSelected = $('#containers .container_section').filter("[data-id=\"".concat(containerId, "\"]")),
+    sectionListSelected = containerSelected.find('.wrapper_section_list'),
+    dataForm = {
+      title: self.data('title'),
+      name: self.data('name'),
+      form: self.data('form')
+    },
+    sectionFormRendred = sectionForm(dataForm);
+  // add section form
   sectionListSelected.next('.no-sections').hide();
   sectionListSelected.append(sectionFormRendred);
   var sectionCreated = sectionListSelected.children('.section-component').last();
   sectionCreated.attr('data-container-id', containerId);
-
-  window.livewire.rescan();
-  $(".change_url_type").select2({
-    minimumResultsForSearch: -1
-  });
-  
   $('html, body').animate({
     scrollTop: sectionCreated.offset().top - 200
   }, 400);
@@ -2863,45 +2835,39 @@ $('#section_class_list .section-list .section-box').on('click', function (e) {
     setTimeout(function () {
       sectionCreated.removeClass('new');
     }, timerHideNewSection);
-  }, 300); // hide section list
+  }, 300);
 
+  // hide section list
   $('#section_class_list').removeClass('open');
 });
 /********************************************************************************/
-// transfrom section form
 
+// transfrom section form
 function sectionForm(_ref) {
   var title = _ref.title,
-      name = _ref.name,
-      form = _ref.form;
+    name = _ref.name,
+    form = _ref.form;
   return "\n        <div\n            class=\"section-component shadow theme-setting-section\"\n            data-section=\"".concat(name, "\"\n        >\n            <div class=\"section-component-header\">\n                <div class=\"section-component-title\">\n                    <h4 class=\"title\">").concat(title, "</h4>\n                </div>\n                <div class=\"section-component-control\">\n                    <div class=\"section-component-control-view\">\n                        <div class=\"btns-moving\">\n                            <div class=\"btn btn-secondary btn-moving mx-1\" data-move=\"top\">\n                                ").concat($trans.to_top, "\n                            </div>\n                            <div class=\"btn btn-secondary btn-moving mx-1\" data-move=\"bottom\">\n                                ").concat($trans.to_bottom, "\n                            </div>\n                            <div class=\"btn-moving mx-1\" data-move=\"up\" title=\"").concat($trans.move_up, "\">\n                                <i class=\"fas fa-arrow-up fa-fw\"></i>\n                            </div>\n                            <div class=\"btn-moving mx-1\" data-move=\"down\" title=\"").concat($trans.move_down, "\">\n                                <i class=\"fas fa-arrow-down fa-fw\"></i>\n                            </div>\n                        </div>\n                        <div class=\"dropdown ms-2\">\n                            <div class=\"btn-menu\" role=\"button\" data-bs-toggle=\"dropdown\">\n                                <i class=\"fas fa-ellipsis-v fa-fw\"></i>\n                            </div>\n                            <ul class=\"dropdown-menu\">\n                                <li>\n                                    <a class=\"dropdown-item duplicate-section\" href=\"javascript:void()\">\n                                        <i class=\"fas fa-copy fa-fw\"></i>\n                                        ").concat($trans.duplicate, "\n                                    </a>\n                                </li>\n                                <li>\n                                    <a class=\"dropdown-item remove-section\" href=\"javascript:void()\">\n                                        <i class=\"fas fa-trash fa-fw\"></i>\n                                        ").concat($trans.remove_section, "\n                                    </a>\n                                </li>\n                            </ul>\n                        </div>\n                        <div class=\"section-component-toggle p-2 ms-2\">\n                            <i class=\"fas fa-chevron-down fa-fw section-component-toggle-icon rotate-180\"></i>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"section-component-wrapper-forms\" style=\"display: block;\">\n                <form class=\"section-component-form\">\n                    ").concat(form, "\n                </form>\n            </div>\n        </div>\n    ");
 }
 /********************************************************************************/
+
 // add new widget
-
-
 $('#widget_class_list .widget-list .widget-box').on('click', function (e) {
   var self = $(this),
-      containerId = self.parents('#widget_class_list').attr('data-container-id'),
-      containerSelected = $('#containers .container_section').filter("[data-id=\"".concat(containerId, "\"]")),
-      sectionListSelected = containerSelected.find('.wrapper_section_list'),
-      dataForm = {
-    title: self.data('title'),
-    namespace: self.data('namespace'),
-    form: self.data('form')
-  },
-      widgetFormRendred = widgetForm(dataForm); // add widget form
-
+    containerId = self.parents('#widget_class_list').attr('data-container-id'),
+    containerSelected = $('#containers .container_section').filter("[data-id=\"".concat(containerId, "\"]")),
+    sectionListSelected = containerSelected.find('.wrapper_section_list'),
+    dataForm = {
+      title: self.data('title'),
+      namespace: self.data('namespace'),
+      form: self.data('form')
+    },
+    widgetFormRendred = widgetForm(dataForm);
+  // add widget form
   sectionListSelected.next('.no-sections').hide();
   sectionListSelected.append(widgetFormRendred);
   var widgetCreated = sectionListSelected.children('.section-component').last();
   widgetCreated.attr('data-container-id', containerId);
-
-  window.livewire.rescan();
-  $(".change_url_type").select2({
-    minimumResultsForSearch: -1
-  });
-  
   $('html, body').animate({
     scrollTop: widgetCreated.offset().top - 200
   }, 400);
@@ -2910,28 +2876,28 @@ $('#widget_class_list .widget-list .widget-box').on('click', function (e) {
     setTimeout(function () {
       widgetCreated.removeClass('new');
     }, timerHideNewSection);
-  }, 300); // hide widget list
+  }, 300);
 
+  // hide widget list
   $('#widget_class_list').removeClass('open');
 });
 /********************************************************************************/
-// transfrom widget form
 
+// transfrom widget form
 function widgetForm(_ref2) {
   var title = _ref2.title,
-      namespace = _ref2.namespace,
-      form = _ref2.form;
+    namespace = _ref2.namespace,
+    form = _ref2.form;
   return "\n        <div\n            class=\"section-component shadow theme-setting-section widget_section\"\n            data-widget=\"".concat(namespace, "\"\n        >\n            <div class=\"section-component-header\">\n                <div class=\"section-component-title\">\n                    <h4 class=\"title\">").concat(title, "</h4>\n                    <span class=\"badge badge-info\">").concat($trans.widget, "</span>\n                </div>\n                <div class=\"section-component-control\">\n                    <div class=\"section-component-control-view\">\n                        <div class=\"btns-moving\">\n                            <div class=\"btn btn-secondary btn-moving mx-1\" data-move=\"top\">\n                                ").concat($trans.to_top, "\n                            </div>\n                            <div class=\"btn btn-secondary btn-moving mx-1\" data-move=\"bottom\">\n                                ").concat($trans.to_bottom, "\n                            </div>\n                            <div class=\"btn-moving mx-1\" data-move=\"up\" title=\"").concat($trans.move_up, "\">\n                                <i class=\"fas fa-arrow-up fa-fw\"></i>\n                            </div>\n                            <div class=\"btn-moving mx-1\" data-move=\"down\" title=\"").concat($trans.move_down, "\">\n                                <i class=\"fas fa-arrow-down fa-fw\"></i>\n                            </div>\n                        </div>\n                        <div class=\"dropdown ms-2\">\n                            <div class=\"btn-menu\" role=\"button\" data-bs-toggle=\"dropdown\">\n                                <i class=\"fas fa-ellipsis-v fa-fw\"></i>\n                            </div>\n                            <ul class=\"dropdown-menu\">\n                                <li>\n                                    <a class=\"dropdown-item duplicate-section\" href=\"javascript:void()\">\n                                        <i class=\"fas fa-copy fa-fw\"></i>\n                                        ").concat($trans.duplicate, "\n                                    </a>\n                                </li>\n                                <li>\n                                    <a class=\"dropdown-item remove-section\" href=\"javascript:void()\">\n                                        <i class=\"fas fa-trash fa-fw\"></i>\n                                        ").concat($trans.remove_section, "\n                                    </a>\n                                </li>\n                            </ul>\n                        </div>\n                        <div class=\"section-component-toggle p-2 ms-2\">\n                            <i class=\"fas fa-chevron-down fa-fw section-component-toggle-icon rotate-180\"></i>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"section-component-wrapper-forms\" style=\"display: block;\">\n                <form class=\"section-component-form\">\n                    ").concat(form, "\n                </form>\n            </div>\n        </div>\n    ");
 }
 /********************************************************************************/
+
 // duplicate section
-
-
 $(document).on('click', '.section-component:not(.container_section) .section-component-header .section-component-control .duplicate-section', function (e) {
   e.preventDefault();
   var self = $(this),
-      parentSelf = self.parents('.section-component:not(.container_section)'),
-      sectionCloned = parentSelf.clone();
+    parentSelf = self.parents('.section-component:not(.container_section)'),
+    sectionCloned = parentSelf.clone();
   sectionCloned.removeAttr('data-id');
   sectionCloned.removeAttr('data-widget-id');
   parentSelf.after(sectionCloned);
@@ -2949,13 +2915,13 @@ $(document).on('click', '.section-component:not(.container_section) .section-com
   }, timerHideNewSection);
 });
 /********************************************************************************/
-// duplicate section
 
+// duplicate section
 $(document).on('click', '.section-component.container_section > .section-component-header .section-component-control .duplicate-section', function (e) {
   e.preventDefault();
   var self = $(this),
-      parentSelf = self.parents('.section-component.container_section'),
-      sectionCloned = parentSelf.clone();
+    parentSelf = self.parents('.section-component.container_section'),
+    sectionCloned = parentSelf.clone();
   sectionCloned.removeAttr('data-id');
   parentSelf.after(sectionCloned);
   resetContainerNames();
@@ -2974,31 +2940,26 @@ $(document).on('click', '.section-component.container_section > .section-compone
   }, timerHideNewSection);
 });
 /********************************************************************************/
-// remove section
 
+// remove section
 var section_list_removed = [];
 var widget_list_removed = [];
 var container_list_removed = [];
 $(document).on('click', '.section-component:not(.container_section) .section-component-header .section-component-control .remove-section', function (e) {
   e.preventDefault();
   var self = $(this),
-      parentSelf = self.parents('.section-component:not(.container_section)'),
-      sectionList = parentSelf.parents('.wrapper_section_list');
-
+    parentSelf = self.parents('.section-component:not(.container_section)'),
+    sectionList = parentSelf.parents('.wrapper_section_list');
   if (parentSelf.attr('data-id')) {
     section_list_removed.push(parentSelf.attr('data-id'));
   }
-
   if (parentSelf.attr('data-widget-id')) {
     widget_list_removed.push(parentSelf.attr('data-widget-id'));
   }
-
   parentSelf.addClass('deleting');
-
   if (sectionList.find('.section-component').length == 1) {
     sectionList.next('.no-sections').show();
   }
-
   setTimeout(function () {
     parentSelf.remove();
   }, 350);
@@ -3006,36 +2967,31 @@ $(document).on('click', '.section-component:not(.container_section) .section-com
 $(document).on('click', '.section-component.container_section > .section-component-header .section-component-control .remove-section', function (e) {
   e.preventDefault();
   var self = $(this),
-      parentSelf = self.parents('.section-component.container_section'),
-      containers = parentSelf.parents('#containers');
-
+    parentSelf = self.parents('.section-component.container_section'),
+    containers = parentSelf.parents('#containers');
   if (parentSelf.attr('data-id') && parentSelf.attr('data-id').indexOf('container_id') == -1) {
     container_list_removed.push(parentSelf.attr('data-id'));
   }
-
   parentSelf.addClass('deleting');
-
   if (containers.find('.container_section').length == 1) {
     $('.empty-containers').removeClass('d-none');
     $('.hide-when-not-containers').addClass('d-none');
   }
-
   setTimeout(function () {
     parentSelf.remove();
     resetContainerNames();
   }, 350);
 });
 /********************************************************************************/
-// moving section
 
+// moving section
 $(document).on('click', '.section-component:not(.container_section) .section-component-header .section-component-control .btns-moving .btn-moving', function (e) {
   e.preventDefault();
   var self = $(this),
-      movied = false,
-      typeMove = self.data('move'),
-      parentSelf = self.parents('.section-component:not(.container_section)'),
-      sectionList = parentSelf.parents('.wrapper_section_list');
-
+    movied = false,
+    typeMove = self.data('move'),
+    parentSelf = self.parents('.section-component:not(.container_section)'),
+    sectionList = parentSelf.parents('.wrapper_section_list');
   if (sectionList.children().length > 1) {
     if (typeMove == 'up') {
       if (parentSelf.prev().length) {
@@ -3059,7 +3015,6 @@ $(document).on('click', '.section-component:not(.container_section) .section-com
       }
     }
   }
-
   if (movied) {
     $('html, body').animate({
       scrollTop: parentSelf.offset().top - 200
@@ -3072,16 +3027,16 @@ $(document).on('click', '.section-component:not(.container_section) .section-com
       parentSelf.removeClass('new');
     }, timerHideNewSection);
   }
-}); // moving section
+});
 
+// moving section
 $(document).on('click', '.section-component.container_section > .section-component-header .section-component-control .btns-moving .btn-moving', function (e) {
   e.preventDefault();
   var self = $(this),
-      movied = false,
-      typeMove = self.data('move'),
-      parentSelf = self.parents('.section-component.container_section'),
-      sectionList = parentSelf.parents('#containers');
-
+    movied = false,
+    typeMove = self.data('move'),
+    parentSelf = self.parents('.section-component.container_section'),
+    sectionList = parentSelf.parents('#containers');
   if (sectionList.children().length > 1) {
     if (typeMove == 'up') {
       if (parentSelf.prev().length) {
@@ -3104,10 +3059,8 @@ $(document).on('click', '.section-component.container_section > .section-compone
         parentSelf.prependTo(sectionList);
       }
     }
-
     resetContainerNames();
   }
-
   if (movied) {
     $('html, body').animate({
       scrollTop: parentSelf.offset().top - 200
@@ -3122,104 +3075,89 @@ $(document).on('click', '.section-component.container_section > .section-compone
   }
 });
 /********************************************************************************/
-// update all sections
 
+// update all sections
 $('.update_theme_setting').on('click', function (e) {
   e.preventDefault();
   var self = $(this),
-      url = self.attr('href'),
-      btnUpdate = $('.update_theme_setting'),
-      loading = btnUpdate.find('.loading-in-btn'),
-      data = [],
-      widgets = [],
-      containers = [];
+    url = self.attr('href'),
+    btnUpdate = $('.update_theme_setting'),
+    loading = btnUpdate.find('.loading-in-btn'),
+    data = [],
+    widgets = [],
+    containers = [];
   $('.theme-setting-section').each(function (i) {
     var _WC$data, _WC$data2;
-
     var WC = $(this),
-        dataFormSerialized = WC.find('.section-component-form').serializeArray(),
-        dataForm = {},
-        dataWC = {
-      id: (_WC$data = WC.data('id')) !== null && _WC$data !== void 0 ? _WC$data : null,
-      container_id: (_WC$data2 = WC.data('container-id')) !== null && _WC$data2 !== void 0 ? _WC$data2 : null,
-      index: WC.index()
-    },
-        inputFiles = WC.find('.section-component-form').find('input[type="file"]'),
-        inputSelectMultiple = WC.find('.section-component-form').find('select[multiple]');
+      dataFormSerialized = WC.find('.section-component-form').serializeArray(),
+      dataForm = {},
+      dataWC = {
+        id: (_WC$data = WC.data('id')) !== null && _WC$data !== void 0 ? _WC$data : null,
+        container_id: (_WC$data2 = WC.data('container-id')) !== null && _WC$data2 !== void 0 ? _WC$data2 : null,
+        index: WC.index()
+      },
+      inputFiles = WC.find('.section-component-form').find('input[type="file"]'),
+      inputSelectMultiple = WC.find('.section-component-form').find('select[multiple]');
     inputArray = WC.find('.section-component-form').find('input[data-type="array"],select[data-type="array"]');
     inputLocalText = WC.find('.section-component-form').find('.form-control-multilingual');
     inputFiles.each(function () {
       var self = $(this),
-          selfEle = self[0];
-
+        selfEle = self[0];
       if (selfEle.files.length) {
         var reader = new FileReader();
         var file = selfEle.files[0];
-
         reader.onloadend = function () {
           dataForm[self.attr('name')] = reader.result;
         };
-
         reader.readAsDataURL(file);
       }
     });
     dataFormSerialized.forEach(function (field) {
       dataForm[field.name] = field.value;
       var name = field.name;
-
       if (name.includes('][')) {
         name = name.replace(']', '').replace(']', '').split('[');
         delete dataForm[field.name];
-
         if (typeof dataForm[name[0]] === 'undefined') {
           dataForm[name[0]] = {};
         }
-
         if (typeof dataForm[name[0]][name[1]] === 'undefined') {
           dataForm[name[0]][name[1]] = {};
         }
-
         if (typeof dataForm[name[0]][name[1]] === 'undefined') {
           dataForm[name[0]][name[1]] = {};
         }
-
         dataForm[name[0]][name[1]][name[2]] = field.value;
       }
     });
     inputSelectMultiple.each(function () {
       var self = $(this),
-          value = self.val();
+        value = self.val();
       dataForm[self.attr('name')] = value;
     });
     inputLocalText.each(function () {
       var self = $(this),
-          value = self.val(),
-          lang = self.attr('title');
-
+        value = self.val(),
+        lang = self.attr('title');
       if (typeof dataForm[self.attr('name').replace("[" + self.attr('title') + "]", '')] === 'undefined') {
         dataForm[self.attr('name').replace("[" + self.attr('title') + "]", '')] = {};
       }
-
       delete dataForm[self.attr('name')];
       dataForm[self.attr('name').replace("[" + self.attr('title') + "]", '')][lang] = value;
     });
     inputArray.each(function () {
       var self = $(this),
-          value = self.val(),
-          type = self.attr('data-title');
-
+        value = self.val(),
+        type = self.attr('data-title');
       if (typeof dataForm[self.attr('name').replace("[" + self.attr('data-title') + "]", '')] === 'undefined') {
         dataForm[self.attr('name').replace("[" + self.attr('data-title') + "]", '')] = {};
       }
-
       delete dataForm[self.attr('name')];
       dataForm[self.attr('name').replace("[" + self.attr('data-title') + "]", '')][type] = value;
     });
     dataWC.form = dataForm;
-
     if (WC.hasClass('widget_section')) {
       var _WC$data3;
-
       dataWC.widget = WC.data('widget');
       dataWC.widget_id = (_WC$data3 = WC.data('widget-id')) !== null && _WC$data3 !== void 0 ? _WC$data3 : null;
       widgets.push(dataWC);
@@ -3230,21 +3168,21 @@ $('.update_theme_setting').on('click', function (e) {
   });
   $('#containers .container_section').each(function (i) {
     var _CS$data;
-
     var CS = $(this),
-        containerDataFormSerialized = CS.find('.wrapper-container-setting .container_form').serializeArray(),
-        containerForm = {},
-        containerDataCS = {
-      id: (_CS$data = CS.data('id')) !== null && _CS$data !== void 0 ? _CS$data : null,
-      index: CS.index()
-    };
+      containerDataFormSerialized = CS.find('.wrapper-container-setting .container_form').serializeArray(),
+      containerForm = {},
+      containerDataCS = {
+        id: (_CS$data = CS.data('id')) !== null && _CS$data !== void 0 ? _CS$data : null,
+        index: CS.index()
+      };
     containerDataFormSerialized.forEach(function (field) {
       containerForm[field.name] = field.value;
     });
     containerDataCS.form = containerForm;
     containers.push(containerDataCS);
-  }); // update sections ajax
+  });
 
+  // update sections ajax
   loading.removeClass('d-none');
   btnUpdate.addClass('disabled');
   var ajaxData = {
@@ -3268,7 +3206,6 @@ $('.update_theme_setting').on('click', function (e) {
     })["catch"](function (error) {
       loading.addClass('d-none');
       btnUpdate.removeClass('disabled');
-
       if (error.response && error.response.status) {
         if (error.response.status == 403) {
           if (error.response.data.message) {
@@ -3308,24 +3245,19 @@ function handleError(errors) {
   var firstInputFound = null;
   errors.forEach(function (errBag) {
     var container = $('#containers .container_section').filter("[data-id=\"".concat(errBag.container_id, "\"]")),
-        WCF = container.find('.theme-setting-section').eq(errBag.index);
-
+      WCF = container.find('.theme-setting-section').eq(errBag.index);
     if (!container.children('.section-component-header').find('.section-component-toggle i').hasClass('rotate-180')) {
       container.children('.section-component-header').click();
     }
-
     if (!WCF.children('.section-component-header').find('.section-component-toggle i').hasClass('rotate-180')) {
       WCF.children('.section-component-header').click();
     }
-
     for (field in errBag.errors) {
       var errorMsg = errBag.errors[field][0],
-          inputFound = WCF.find("[name=\"".concat(field, "\"]"));
-
+        inputFound = WCF.find("[name=\"".concat(field, "\"]"));
       if (!firstInputFound) {
         firstInputFound = inputFound;
       }
-
       inputFound.addClass('is-invalid').after("<div class=\"invalid-feedback\">".concat(errorMsg, "</div>"));
     }
   });
@@ -3333,20 +3265,16 @@ function handleError(errors) {
     scrollTop: firstInputFound.offset().top - 170
   }, 400);
 }
-
 function removeErrorMessages() {
   $('.theme-setting-section .invalid-feedback').remove();
   $('.theme-setting-section .is-invalid').removeClass('is-invalid');
 }
 /********************************************************************************/
-
-
 function resetContainerNames() {
   $('#containers .container_section').each(function (i) {
     $(this).children('.section-component-header').find('.section-component-title .title').text($trans.container + ' ' + (i + 1));
   });
 }
-
 window.resetContainerNames = resetContainerNames;
 /********************************************************************************/
 
@@ -3368,167 +3296,6 @@ setTimeout(function () {
 
 /***/ }),
 
-/***/ "./node_modules/base64-js/index.js":
-/*!*****************************************!*\
-  !*** ./node_modules/base64-js/index.js ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-
-exports.byteLength = byteLength
-exports.toByteArray = toByteArray
-exports.fromByteArray = fromByteArray
-
-var lookup = []
-var revLookup = []
-var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
-
-var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-for (var i = 0, len = code.length; i < len; ++i) {
-  lookup[i] = code[i]
-  revLookup[code.charCodeAt(i)] = i
-}
-
-// Support decoding URL-safe base64 strings, as Node.js does.
-// See: https://en.wikipedia.org/wiki/Base64#URL_applications
-revLookup['-'.charCodeAt(0)] = 62
-revLookup['_'.charCodeAt(0)] = 63
-
-function getLens (b64) {
-  var len = b64.length
-
-  if (len % 4 > 0) {
-    throw new Error('Invalid string. Length must be a multiple of 4')
-  }
-
-  // Trim off extra bytes after placeholder bytes are found
-  // See: https://github.com/beatgammit/base64-js/issues/42
-  var validLen = b64.indexOf('=')
-  if (validLen === -1) validLen = len
-
-  var placeHoldersLen = validLen === len
-    ? 0
-    : 4 - (validLen % 4)
-
-  return [validLen, placeHoldersLen]
-}
-
-// base64 is 4/3 + up to two characters of the original data
-function byteLength (b64) {
-  var lens = getLens(b64)
-  var validLen = lens[0]
-  var placeHoldersLen = lens[1]
-  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
-}
-
-function _byteLength (b64, validLen, placeHoldersLen) {
-  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
-}
-
-function toByteArray (b64) {
-  var tmp
-  var lens = getLens(b64)
-  var validLen = lens[0]
-  var placeHoldersLen = lens[1]
-
-  var arr = new Arr(_byteLength(b64, validLen, placeHoldersLen))
-
-  var curByte = 0
-
-  // if there are placeholders, only get up to the last complete 4 chars
-  var len = placeHoldersLen > 0
-    ? validLen - 4
-    : validLen
-
-  var i
-  for (i = 0; i < len; i += 4) {
-    tmp =
-      (revLookup[b64.charCodeAt(i)] << 18) |
-      (revLookup[b64.charCodeAt(i + 1)] << 12) |
-      (revLookup[b64.charCodeAt(i + 2)] << 6) |
-      revLookup[b64.charCodeAt(i + 3)]
-    arr[curByte++] = (tmp >> 16) & 0xFF
-    arr[curByte++] = (tmp >> 8) & 0xFF
-    arr[curByte++] = tmp & 0xFF
-  }
-
-  if (placeHoldersLen === 2) {
-    tmp =
-      (revLookup[b64.charCodeAt(i)] << 2) |
-      (revLookup[b64.charCodeAt(i + 1)] >> 4)
-    arr[curByte++] = tmp & 0xFF
-  }
-
-  if (placeHoldersLen === 1) {
-    tmp =
-      (revLookup[b64.charCodeAt(i)] << 10) |
-      (revLookup[b64.charCodeAt(i + 1)] << 4) |
-      (revLookup[b64.charCodeAt(i + 2)] >> 2)
-    arr[curByte++] = (tmp >> 8) & 0xFF
-    arr[curByte++] = tmp & 0xFF
-  }
-
-  return arr
-}
-
-function tripletToBase64 (num) {
-  return lookup[num >> 18 & 0x3F] +
-    lookup[num >> 12 & 0x3F] +
-    lookup[num >> 6 & 0x3F] +
-    lookup[num & 0x3F]
-}
-
-function encodeChunk (uint8, start, end) {
-  var tmp
-  var output = []
-  for (var i = start; i < end; i += 3) {
-    tmp =
-      ((uint8[i] << 16) & 0xFF0000) +
-      ((uint8[i + 1] << 8) & 0xFF00) +
-      (uint8[i + 2] & 0xFF)
-    output.push(tripletToBase64(tmp))
-  }
-  return output.join('')
-}
-
-function fromByteArray (uint8) {
-  var tmp
-  var len = uint8.length
-  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
-  var parts = []
-  var maxChunkLength = 16383 // must be multiple of 3
-
-  // go through the array every three bytes, we'll deal with trailing stuff later
-  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
-    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
-  }
-
-  // pad the end with zeros, but make sure to not forget the extra bytes
-  if (extraBytes === 1) {
-    tmp = uint8[len - 1]
-    parts.push(
-      lookup[tmp >> 2] +
-      lookup[(tmp << 4) & 0x3F] +
-      '=='
-    )
-  } else if (extraBytes === 2) {
-    tmp = (uint8[len - 2] << 8) + uint8[len - 1]
-    parts.push(
-      lookup[tmp >> 10] +
-      lookup[(tmp >> 4) & 0x3F] +
-      lookup[(tmp << 2) & 0x3F] +
-      '='
-    )
-  }
-
-  return parts.join('')
-}
-
-
-/***/ }),
-
 /***/ "./node_modules/buffer/index.js":
 /*!**************************************!*\
   !*** ./node_modules/buffer/index.js ***!
@@ -3546,7 +3313,7 @@ function fromByteArray (uint8) {
 
 
 
-var base64 = __webpack_require__(/*! base64-js */ "./node_modules/base64-js/index.js")
+var base64 = __webpack_require__(/*! base64-js */ "./node_modules/buffer/node_modules/base64-js/index.js")
 var ieee754 = __webpack_require__(/*! ieee754 */ "./node_modules/ieee754/index.js")
 var isArray = __webpack_require__(/*! isarray */ "./node_modules/isarray/index.js")
 
@@ -5324,6 +5091,167 @@ function blitBuffer (src, dst, offset, length) {
 
 function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/buffer/node_modules/base64-js/index.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/buffer/node_modules/base64-js/index.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+exports.byteLength = byteLength
+exports.toByteArray = toByteArray
+exports.fromByteArray = fromByteArray
+
+var lookup = []
+var revLookup = []
+var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
+
+var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+for (var i = 0, len = code.length; i < len; ++i) {
+  lookup[i] = code[i]
+  revLookup[code.charCodeAt(i)] = i
+}
+
+// Support decoding URL-safe base64 strings, as Node.js does.
+// See: https://en.wikipedia.org/wiki/Base64#URL_applications
+revLookup['-'.charCodeAt(0)] = 62
+revLookup['_'.charCodeAt(0)] = 63
+
+function getLens (b64) {
+  var len = b64.length
+
+  if (len % 4 > 0) {
+    throw new Error('Invalid string. Length must be a multiple of 4')
+  }
+
+  // Trim off extra bytes after placeholder bytes are found
+  // See: https://github.com/beatgammit/base64-js/issues/42
+  var validLen = b64.indexOf('=')
+  if (validLen === -1) validLen = len
+
+  var placeHoldersLen = validLen === len
+    ? 0
+    : 4 - (validLen % 4)
+
+  return [validLen, placeHoldersLen]
+}
+
+// base64 is 4/3 + up to two characters of the original data
+function byteLength (b64) {
+  var lens = getLens(b64)
+  var validLen = lens[0]
+  var placeHoldersLen = lens[1]
+  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
+}
+
+function _byteLength (b64, validLen, placeHoldersLen) {
+  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
+}
+
+function toByteArray (b64) {
+  var tmp
+  var lens = getLens(b64)
+  var validLen = lens[0]
+  var placeHoldersLen = lens[1]
+
+  var arr = new Arr(_byteLength(b64, validLen, placeHoldersLen))
+
+  var curByte = 0
+
+  // if there are placeholders, only get up to the last complete 4 chars
+  var len = placeHoldersLen > 0
+    ? validLen - 4
+    : validLen
+
+  var i
+  for (i = 0; i < len; i += 4) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 18) |
+      (revLookup[b64.charCodeAt(i + 1)] << 12) |
+      (revLookup[b64.charCodeAt(i + 2)] << 6) |
+      revLookup[b64.charCodeAt(i + 3)]
+    arr[curByte++] = (tmp >> 16) & 0xFF
+    arr[curByte++] = (tmp >> 8) & 0xFF
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  if (placeHoldersLen === 2) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 2) |
+      (revLookup[b64.charCodeAt(i + 1)] >> 4)
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  if (placeHoldersLen === 1) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 10) |
+      (revLookup[b64.charCodeAt(i + 1)] << 4) |
+      (revLookup[b64.charCodeAt(i + 2)] >> 2)
+    arr[curByte++] = (tmp >> 8) & 0xFF
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  return arr
+}
+
+function tripletToBase64 (num) {
+  return lookup[num >> 18 & 0x3F] +
+    lookup[num >> 12 & 0x3F] +
+    lookup[num >> 6 & 0x3F] +
+    lookup[num & 0x3F]
+}
+
+function encodeChunk (uint8, start, end) {
+  var tmp
+  var output = []
+  for (var i = start; i < end; i += 3) {
+    tmp =
+      ((uint8[i] << 16) & 0xFF0000) +
+      ((uint8[i + 1] << 8) & 0xFF00) +
+      (uint8[i + 2] & 0xFF)
+    output.push(tripletToBase64(tmp))
+  }
+  return output.join('')
+}
+
+function fromByteArray (uint8) {
+  var tmp
+  var len = uint8.length
+  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
+  var parts = []
+  var maxChunkLength = 16383 // must be multiple of 3
+
+  // go through the array every three bytes, we'll deal with trailing stuff later
+  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
+    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
+  }
+
+  // pad the end with zeros, but make sure to not forget the extra bytes
+  if (extraBytes === 1) {
+    tmp = uint8[len - 1]
+    parts.push(
+      lookup[tmp >> 2] +
+      lookup[(tmp << 4) & 0x3F] +
+      '=='
+    )
+  } else if (extraBytes === 2) {
+    tmp = (uint8[len - 2] << 8) + uint8[len - 1]
+    parts.push(
+      lookup[tmp >> 10] +
+      lookup[(tmp >> 4) & 0x3F] +
+      lookup[(tmp << 2) & 0x3F] +
+      '='
+    )
+  }
+
+  return parts.join('')
 }
 
 

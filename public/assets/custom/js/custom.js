@@ -9,20 +9,20 @@
 
 $(document).on('change', '.comment_approval', function (e) {
   var self = $(this),
-      currentValue = self[0].checked,
-      action = currentValue ? 'approve' : 'reject',
-      url = self.data('url'),
-      approvedText = self.data('approved-text'),
-      rejectedText = self.data('rejected-text'),
-      class_approved = action == 'approve' ? 'success' : 'danger',
-      text_approved = action == 'approve' ? approvedText : rejectedText,
-      modelId = self.data('model-id'),
-      timeAlert = 2000,
-      data = {
-    ids: [modelId],
-    action: action,
-    _token: _csrf_token
-  };
+    currentValue = self[0].checked,
+    action = currentValue ? 'approve' : 'reject',
+    url = self.data('url'),
+    approvedText = self.data('approved-text'),
+    rejectedText = self.data('rejected-text'),
+    class_approved = action == 'approve' ? 'success' : 'danger',
+    text_approved = action == 'approve' ? approvedText : rejectedText,
+    modelId = self.data('model-id'),
+    timeAlert = 2000,
+    data = {
+      ids: [modelId],
+      action: action,
+      _token: _csrf_token
+    };
   axios.post(url, data).then(function (res) {
     Toast.fire({
       icon: 'success',
@@ -82,7 +82,6 @@ $(document).ready(function () {
     var self = $(this);
     self.parent('.lang_container').find('.form-control-multilingual').addClass('d-none');
     self.parent('.lang_container').find('.form-control-' + self.val()).removeClass('d-none').focus();
-
     if (self.parent('.lang_container').find('.editor_container').length > 0) {
       self.parent('.lang_container').find('.editor_container').addClass('d-none');
       self.parent('.lang_container').find('#editor_container_' + self.val()).removeClass('d-none').focus();
@@ -95,39 +94,30 @@ $(document).ready(function () {
     width: '100%'
   });
 });
-
 function formatFlag(lang) {
   if (!lang.id) {
     return lang.text;
   }
-
   var $img = $(lang.element).attr("data-flag");
-
   if ($img) {
     var $lang = $('<span ><img sytle="display: inline-block;" src=" ' + $(lang.element).attr("data-flag") + ' " />&emsp;' + lang.text + '</span>');
   } else {
     var $lang = $('<span >' + lang.text + '</span>');
   }
-
   return $lang;
 }
-
 function formatState(lang) {
   if (!lang.id) {
     return lang.text;
   }
-
   var $img = $(lang.element).attr("data-flag");
-
   if ($img) {
     var $lang = $('<span ><img sytle="display: inline-block;" src=" ' + $(lang.element).attr("data-flag") + ' " />&emsp;' + lang.text + '</span>');
   } else {
     var $lang = $('<span >' + lang.text + '</span>');
   }
-
   return $lang;
 }
-
 ;
 
 /***/ }),
@@ -143,7 +133,6 @@ $(document).ready(function () {
     !*** Select fields ***!
     \*******************************************************/
   $("select.form-select").select2();
-
   if (typeof formatFlag !== 'undefined') {
     $(".change_language").select2({
       templateResult: formatFlag,
@@ -155,8 +144,6 @@ $(document).ready(function () {
   /*!*******************************************************!*\
     !*** Color picker fields ***!
     \*******************************************************/
-
-
   if (typeof spectrum === 'function') {
     $('.color_picker_input').spectrum({
       type: "component",
@@ -179,13 +166,13 @@ $(document).ready(function () {
 
 $(document).on('change', '.switch_table', function (e) {
   var self = $(this),
-      url = self.data('url'),
-      modelId = self.data('model-id'),
-      parentEle = self.data('parent'),
-      timeAlert = 2000,
-      data = {
-    _token: _csrf_token
-  };
+    url = self.data('url'),
+    modelId = self.data('model-id'),
+    parentEle = self.data('parent'),
+    timeAlert = 2000,
+    data = {
+      _token: _csrf_token
+    };
   axios.post(url, data).then(function (res) {
     Toast.fire({
       icon: 'success',
@@ -292,13 +279,9 @@ var __webpack_exports__ = {};
   !*** ./resources/assets/custom/js/custom.js ***!
   \**********************************************/
 __webpack_require__(/*! ./comment_approval */ "./resources/assets/custom/js/comment_approval.js");
-
 __webpack_require__(/*! ./switch-in-table */ "./resources/assets/custom/js/switch-in-table.js");
-
 __webpack_require__(/*! ./multilingual-selector */ "./resources/assets/custom/js/multilingual-selector.js");
-
 __webpack_require__(/*! ./url-selector */ "./resources/assets/custom/js/url-selector.js");
-
 __webpack_require__(/*! ./settings-fields */ "./resources/assets/custom/js/settings-fields.js");
 })();
 

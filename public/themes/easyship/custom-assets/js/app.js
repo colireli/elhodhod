@@ -12,14 +12,14 @@ var defaultImage = window.defaultImage;
 $(document).on('click', '.comment-reply-btn', function (e) {
   e.preventDefault();
   var self = $(this),
-      commentId = self.data('comment-id'),
-      replyTo = self.attr('data-reply-to'),
-      level = self.attr('data-level'),
-      respond = $('#respond');
+    commentId = self.data('comment-id'),
+    replyTo = self.attr('data-reply-to'),
+    level = self.attr('data-level'),
+    respond = $('#respond');
   self.parents('#comment-' + commentId).append(respond);
   var form = $('#commentform'),
-      cancelReply = $('#reply-title .cancel-comment-reply-link'),
-      titleReplyTo = $('#reply-title .text-title');
+    cancelReply = $('#reply-title .cancel-comment-reply-link'),
+    titleReplyTo = $('#reply-title .text-title');
   $('html, body').animate({
     scrollTop: respond.offset().top - 150
   }, 500);
@@ -32,9 +32,9 @@ $(document).on('click', '.comment-reply-btn', function (e) {
 $(document).on('click', '.cancel-comment-reply-link', function (e) {
   e.preventDefault();
   var respond = $('#respond'),
-      form = $('#commentform'),
-      cancelReply = $('#reply-title .cancel-comment-reply-link'),
-      titleReplyTo = $('#reply-title .text-title');
+    form = $('#commentform'),
+    cancelReply = $('#reply-title .cancel-comment-reply-link'),
+    titleReplyTo = $('#reply-title .text-title');
   $('#parent-respond').append(respond);
   cancelReply.hide();
   titleReplyTo.text('Leave a Reply');
@@ -44,34 +44,30 @@ $(document).on('click', '.cancel-comment-reply-link', function (e) {
 $('#commentform').on('submit', function (e) {
   e.preventDefault();
   var form = $(this),
-      formData = new FormData(form[0]),
-      url = form.attr('action'),
-      postId = form.attr('data-post-id'),
-      commentId = form.attr('data-comment-id'),
-      level = form.attr('data-level'),
-      authorpage = form.attr('data-author-page'),
-      commentAuthorCookies = form.attr('data-comment-author-cookies') ? JSON.parse(form.attr('data-comment-author-cookies')) : null,
-      authId = form.data('auth-id'),
-      comments_list_level1 = $('.comments_list.level1'),
-      comments_list_level2 = $('.comments_list.level2'),
-      comments_list_level3 = $('.comments_list.level3'),
-      addCommentEle = level == 1 ? comments_list_level1 : level == 2 ? comments_list_level2 : comments_list_level3,
-      isReply = level == 1 || level == 2 ? true : false,
-      commentLevel = level == 1 ? 2 : level == 2 ? 3 : null,
-      btnSubmit = form.find('.form-submit .btn-submit'),
-      loadingIcon = btnSubmit.find('.loading-icon'),
-      commentCountShow = $('#comment_count_show');
-
+    formData = new FormData(form[0]),
+    url = form.attr('action'),
+    postId = form.attr('data-post-id'),
+    commentId = form.attr('data-comment-id'),
+    level = form.attr('data-level'),
+    authorpage = form.attr('data-author-page'),
+    commentAuthorCookies = form.attr('data-comment-author-cookies') ? JSON.parse(form.attr('data-comment-author-cookies')) : null,
+    authId = form.data('auth-id'),
+    comments_list_level1 = $('.comments_list.level1'),
+    comments_list_level2 = $('.comments_list.level2'),
+    comments_list_level3 = $('.comments_list.level3'),
+    addCommentEle = level == 1 ? comments_list_level1 : level == 2 ? comments_list_level2 : comments_list_level3,
+    isReply = level == 1 || level == 2 ? true : false,
+    commentLevel = level == 1 ? 2 : level == 2 ? 3 : null,
+    btnSubmit = form.find('.form-submit .btn-submit'),
+    loadingIcon = btnSubmit.find('.loading-icon'),
+    commentCountShow = $('#comment_count_show');
   if (level != 1) {
     addCommentEle = addCommentEle.filter("[data-comment-id=\"".concat(commentId, "\"]"));
   }
-
   formData.append('post_id', postId);
-
   if (commentId) {
     formData.append('parent_id', commentId);
   }
-
   $.ajax({
     url: url,
     data: formData,
@@ -105,7 +101,6 @@ $('#commentform').on('submit', function (e) {
     error: function error(_error) {
       btnSubmit.removeClass('disabled');
       loadingIcon.addClass('hide-load');
-
       if (_error && _error.status) {
         if (_error.status == 500) {
           toggleAlertError('Server Error!');
@@ -120,15 +115,12 @@ $('#commentform').on('submit', function (e) {
     }
   });
 });
-
 function newComment(comment, authorpage, isReply, commentLevel) {
   return "\n    <li id=\"comment-".concat(comment.id, "\"\n        class=\"comment byuser comment-author-admin bypostauthor even depth-3\">\n        <article id=\"div-comment-").concat(comment.id, "\" class=\"comment-body ").concat(comment.approved == 0 ? 'pending' : '', "\">\n            ").concat(comment.approved == 0 ? "<div class=\"pending-badge\">\n                    <div class=\"text-badge\">\n                        Waiting for approval\n                    </div>\n                </div>" : '', "\n            <footer class=\"comment-meta\">\n                <div class=\"comment-author vcard\">\n                    <img alt=\"").concat(comment.creator ? comment.creator.name : 'not auth', "\"\n                        data-srcset=\"").concat(comment.creator ? comment.creator.avatar_image : defaultImage, "\"\n                        height=\"50\" width=\"50\"\n                        data-src=\"").concat(comment.creator ? comment.creator.avatar_image : defaultImage, "\"\n                        class=\"avatar avatar-50 photo lazyloaded visible full-visible\"\n                        src=\"").concat(comment.creator ? comment.creator.avatar_image : defaultImage, "\"\n                        loading=\"lazy\"\n                        srcset=\"").concat(comment.creator ? comment.creator.avatar_image : defaultImage, "\"\n                    >\n                        <b class=\"fn\">\n                            ").concat(comment.creator ? "<a href=\"".concat(authorpage + '/' + comment.creator.name, "\" rel=\"external nofollow ugc\" class=\"url\">\n                                    ").concat(comment.creator.name + youAuth(comment.creator), "\n                                </a>") : "<span class=\"url\">\n                                    ".concat(comment.author_name + youAuth(comment, true), "\n                                </span>"), "\n                        </b>\n                    </div>\n                <div class=\"comment-metadata\">\n                    <time datetime=\"").concat(comment.created_at, "\">\n                        ").concat(comment.date, "\n                    </time>\n                </div>\n            </footer>\n            <div class=\"comment-content\">\n                <p> ").concat(comment.content, " </p>\n            </div>\n\n            ").concat(isReply ? "<div class=\"reply\">\n                    <a \n                        rel=\"nofollow\" class=\"comment-reply-btn\"\n                        href=\"javascript:void()\"\n                        data-comment-id=\"".concat(comment.id, "\"\n                        data-level=\"").concat(commentLevel, "\"\n                        data-reply-to=\"Reply to ").concat(comment.creator ? comment.creator.name : comment.author_name, "\"\n                    >\n                        Reply\n                    </a>\n                </div>") : '', "\n            ").concat(commentLevel ? "<ol class=\"children comments_list level".concat(commentLevel, "\" data-comment-id=\"").concat(comment.id, "\"></ol>") : '', "\n\n        </article>\n    </li>\n    ");
 }
-
 function youAuth(creator) {
   var creator_cookie = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
   var you = false;
-
   if (creator_cookie) {
     you = creator.author_email == (window.commentAuthorCookies ? window.commentAuthorCookies.author_email : null);
   } else {
@@ -136,16 +128,12 @@ function youAuth(creator) {
       you = creator.id == window.authId;
     }
   }
-
   return you ? ' (' + trans.you + ')' : '';
 }
-
 window.youAuth = youAuth;
-
 function resetFormComment(form) {
   var data = new FormData(form[0]),
-      comment_cookies = data.get('comment_cookies');
-
+    comment_cookies = data.get('comment_cookies');
   if (comment_cookies) {
     form.find('#comment_content').val('');
   } else {
@@ -155,14 +143,11 @@ function resetFormComment(form) {
     form.find('#comment_author_website').val('');
   }
 }
-
 function handleErrorsValidation() {
   var errors = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var keys = ['content', 'author_name', 'author_email', 'author_website'];
-
   for (var i = 0; i < keys.length; i++) {
     var fieldName = keys[i];
-
     if (errors[fieldName]) {
       $("[name=\"".concat(fieldName, "\"]")).addClass('is-invalid').next('.invalid-feedback').text(errors[fieldName]);
       $(".label_".concat(fieldName)).addClass('label-is-invalid');
@@ -172,12 +157,10 @@ function handleErrorsValidation() {
     }
   }
 }
-
 function toggleAlertError() {
   var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
   var alertError = $('#alert-error-new-comment'),
-      status = message != null ? 'show' : 'hide';
-
+    status = message != null ? 'show' : 'hide';
   if (status == 'show') {
     alertError.removeClass('hide');
     alertError.find('.text-error').text(message);
@@ -202,13 +185,13 @@ var urlLoadMoreReplies = window.urlLoadMoreReplies;
 $('#get_prev_comment_btn').on('click', function (e) {
   e.preventDefault();
   var self = $(this),
-      url = self.attr('data-url'),
-      postId = self.attr('data-post-id'),
-      commentsCount = self.data('comments-count'),
-      commentsOffset = self.attr('data-comments-offset'),
-      commentsList = $('.comments_list.level1'),
-      // loading         = $('.comments-loading');
-  loading = self.find('.loading-icon');
+    url = self.attr('data-url'),
+    postId = self.attr('data-post-id'),
+    commentsCount = self.data('comments-count'),
+    commentsOffset = self.attr('data-comments-offset'),
+    commentsList = $('.comments_list.level1'),
+    // loading         = $('.comments-loading');
+    loading = self.find('.loading-icon');
   var data = {
     post_id: postId,
     comments_offset: commentsOffset
@@ -230,19 +213,16 @@ $('#get_prev_comment_btn').on('click', function (e) {
       self.removeClass('disabled');
       loading.addClass('hide-load');
       var comments = data.comments;
-
       for (var i = 0; i < comments.length; i++) {
         var comment = comments[i];
         commentsList.prepend(newComment(comment));
         commentsList.find(".div-comment-".concat(comment.id)).addClass('comment-added-animate');
       }
-
       setTimeout(function () {
         commentsList.find('.comment-body').removeClass('comment-added-animate');
       }, 700);
       var comments_count_ele = commentsList.children('li.comment').length;
       self.attr('data-comments-offset', comments_count_ele);
-
       if (comments_count_ele == commentsCount) {
         self.remove();
       }
@@ -252,13 +232,13 @@ $('#get_prev_comment_btn').on('click', function (e) {
 $(document).on('click', '.get-prev-replies-btn', function (e) {
   e.preventDefault();
   var self = $(this),
-      url = self.attr('data-url'),
-      commentId = self.attr('data-comment-id'),
-      commentsCount = self.data('comments-count'),
-      level = self.data('replies-level'),
-      commentsOffset = self.attr('data-comments-offset'),
-      commentsList = $("#comment-".concat(commentId, " > .comments_list.level").concat(level)),
-      loading = self.find('.loading-icon');
+    url = self.attr('data-url'),
+    commentId = self.attr('data-comment-id'),
+    commentsCount = self.data('comments-count'),
+    level = self.data('replies-level'),
+    commentsOffset = self.attr('data-comments-offset'),
+    commentsList = $("#comment-".concat(commentId, " > .comments_list.level").concat(level)),
+    loading = self.find('.loading-icon');
   var data = {
     comment_id: commentId,
     level: level,
@@ -281,26 +261,22 @@ $(document).on('click', '.get-prev-replies-btn', function (e) {
       self.removeClass('disabled');
       loading.addClass('hide-load');
       var replies = data.comments;
-
       for (var i = 0; i < replies.length; i++) {
         var reply = replies[i];
         commentsList.prepend(newReplies(reply));
         commentsList.find(".div-comment-".concat(reply.id)).addClass('comment-added-animate');
       }
-
       setTimeout(function () {
         commentsList.find('.comment-body').removeClass('comment-added-animate');
       }, 700);
       var comments_count_ele = commentsList.children('li.comment').length;
       self.attr('data-comments-offset', comments_count_ele);
-
       if (comments_count_ele == commentsCount) {
         self.remove();
       }
     }
   });
 });
-
 function newComment(comment) {
   var list = "<li id=\"comment-".concat(comment.id, "\" class=\"comment byuser comment-author-admin bypostauthor even thread-odd thread-alt depth-1 parent\">");
   list += commentArticle(comment);
@@ -308,29 +284,24 @@ function newComment(comment) {
   console.log(list);
   return list;
 }
-
 function newSubComments(parent_comment) {
   var revevedComments = parent_comment.comments.reverse();
   var childrenComments = parent_comment.level != 3 ? "<ol class=\"children comments_list level".concat(parent_comment.level + 1, "\" data-comment-id=\"").concat(parent_comment.id, "\">") : '';
-
   for (var i = 0; i < revevedComments.length; i++) {
     var comment = revevedComments[i];
     childrenComments += "<li id=\"comment-".concat(comment.id, "\" class=\"comment\">");
     childrenComments += commentArticle(comment);
     childrenComments += "".concat(newSubComments(comment), "  </li>");
   }
-
   childrenComments += parent_comment.level != 3 ? "</ol>" : '';
   return childrenComments;
 }
-
 function newReplies(parent_reply) {
   var resultReply = "<li id=\"comment-".concat(parent_reply.id, "\" class=\"comment\">");
   resultReply += commentArticle(parent_reply);
   resultReply += "".concat(newSubComments(parent_reply), "  </li>");
   return resultReply;
 }
-
 function commentArticle(comment) {
   return "\n        <article id=\"div-comment-".concat(comment.id, "\" class=\"comment-body div-comment-").concat(comment.id, " ").concat(comment.approved == 0 ? 'pending' : '', "\">\n        ").concat(comment.approved == 0 ? "<div class=\"pending-badge\">\n                <div class=\"text-badge\">\n                    Waiting for approval\n                </div>\n            </div>" : '', "\n        <footer class=\"comment-meta\">\n            <div class=\"comment-author vcard\">\n                <img alt=\"").concat(comment.creator ? comment.creator.name : 'not auth', "\"\n                    data-srcset=\"").concat(comment.creator ? comment.creator.avatar_image : defaultImage, "\"\n                    height=\"50\" width=\"50\"\n                    data-src=\"").concat(comment.creator ? comment.creator.avatar_image : defaultImage, "\"\n                    class=\"avatar avatar-50 photo lazyloaded visible full-visible\"\n                    src=\"").concat(comment.creator ? comment.creator.avatar_image : defaultImage, "\"\n                    loading=\"lazy\"\n                    srcset=\"").concat(comment.creator ? comment.creator.avatar_image : defaultImage, "\"\n                >\n                    <b class=\"fn\">\n\n                        ").concat(comment.creator ? "<a href=\"".concat(comment.creator.author_page, "\" rel=\"external nofollow ugc\" class=\"url\">\n                                ").concat(comment.creator.name + youAuth(comment.creator), "\n                            </a>") : "<span class=\"url\">\n                                ".concat(comment.author_name + youAuth(comment, true), "\n                            </span>"), "\n                    </b>\n                </div>\n            <div class=\"comment-metadata\">\n                <time datetime=\"").concat(comment.created_at, "\">\n                    ").concat(comment.date, "\n                </time>\n            </div>\n        </footer>\n        <div class=\"comment-content\">\n            <p> ").concat(comment.content, " </p>\n        </div>\n        ").concat(comment.level == 1 || comment.level == 2 ? "<div class=\"reply\">\n                <a\n                    rel=\"nofollow\" class=\"comment-reply-btn\"\n                    href=\"javascript:void()\"\n                    data-comment-id=\"".concat(comment.id, "\"\n                    data-level=\"").concat(comment.level + 1, "\"\n                    data-reply-to=\"Reply to ").concat(comment.creator ? comment.creator.name : comment.author_name, "\"\n                >\n                    Reply\n                </a>\n            </div>") : '', "\n    </article>\n    ").concat((comment.level == 1 || comment.level == 2) && comment.comments_count > 3 ? "<div class=\"get-perv-replies\">\n                <a\n                    rel=\"nofollow\"\n                    class=\"get-prev-comments get-prev-replies-btn\"\n                    href=\"javascript:void()\"\n                    data-url=\"".concat(urlLoadMoreReplies, "\"\n                    data-comment-id=\"").concat(comment.id, "\"\n                    data-replies-level=\"").concat(comment.level + 1, "\"\n                    data-comments-count=\"").concat(comment.comments_count, "\"\n                    data-comments-offset=\"").concat(comment.comments.length, "\"\n                >\n                    View previous replies\n                    <span class=\"loading-icon hide-load\">\n                        <i class=\"fa fa-circle-o-notch fa-spin\"></i>\n                    </span>\n                </a>\n            </div>") : '', "\n    ");
 }
@@ -375,8 +346,8 @@ var __webpack_exports__ = {};
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-__webpack_require__(/*! ./add_comment */ "./themes/easyship/assets/js/add_comment.js");
 
+__webpack_require__(/*! ./add_comment */ "./themes/easyship/assets/js/add_comment.js");
 __webpack_require__(/*! ./load_more_comments */ "./themes/easyship/assets/js/load_more_comments.js");
 })();
 
