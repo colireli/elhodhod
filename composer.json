@@ -7,17 +7,22 @@
         "laravel"
     ],
     "license": "MIT",
-    "repositories": [
+    "repositories": 
         {
-
-            "type": "composer",
-            "url": "https://satis.spatie.be"
-
+            "laravel-medialibrary-pro" : 
+            {
+                "type": "path",
+                "url": "prePackages/spatie/laravel-medialibrary-pro",
+                "options" : { 
+                    "symlink" : true
+                }
+            }
         }
-    ],
+    ,
     "require": {
         "php": "^7.3|^8.1",
         "mpdf/mpdf": "^8.0",
+        "spatie/laravel-medialibrary-pro": "@dev",
         "fruitcake/laravel-cors": "^2.0",
         "genealabs/laravel-model-caching": "^0.11.3",
         "guzzlehttp/guzzle": "^7.4",

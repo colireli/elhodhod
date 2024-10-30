@@ -7,7 +7,7 @@
             $model = App\Models\Settings::where('group', 'general')->where('name','system_logo')->first();
         @endphp
         <a href="{{ aurl('/') }}" style="display: flex;justify-content: center;">
-            <img src="{{ asset('assets/lte/media/logos/favicon.ico') ? asset('assets/lte/media/logos/favicon.ico') : asset('assets/lte/cargo-logo-white.svg') }}" alt="Logo" style="height: 38px;" class="logo" />
+            <img src="{{ $model->getFirstMediaUrl('system_logo') ? $model->getFirstMediaUrl('system_logo') : asset('assets/lte/cargo-logo-white.svg') }}" alt="Logo" style="height: 38px;" class="logo" />
         </a>
         <!--end::Logo-->
     </div>
