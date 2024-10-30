@@ -27,4 +27,6 @@ storage/framework/cache/data/
 .env
 /temp
 elho_database.sql
+/vendor
+composer.luck
 
