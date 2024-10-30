@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "^7.3|^8.1",
-        "mpdf/mpdf": "^6.1",
+        "mpdf/mpdf": "^8.2.4",
         "fruitcake/laravel-cors": "^2.0",
         "genealabs/laravel-model-caching": "^0.11.3",
         "guzzlehttp/guzzle": "^7.4",
