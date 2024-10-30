@@ -28,5 +28,4 @@ storage/framework/cache/data/
 /temp
 elho_database.sql
 /vendor
-composer.luck
-
+composer.lock
