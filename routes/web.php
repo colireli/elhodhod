@@ -35,7 +35,7 @@ if (\Illuminate\Support\Facades\Schema::hasTable('translations') && check_module
             Artisan::call('storage:link');
         });
     });
-    Route::mediaLibrary();
+    // Route::mediaLibrary();
 }else{
     // home
     Route::get('/', 'HomeController@index')->name('home');
