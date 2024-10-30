@@ -16,21 +16,23 @@ class Card extends IyzipayResource
     private $cardToken;
     private $cardAlias;
     private $binNumber;
+    private $lastFourDigits;
     private $cardType;
     private $cardAssociation;
     private $cardFamily;
     private $cardBankCode;
     private $cardBankName;
+    const URL = "/cardstorage/card";
 
     public static function create(CreateCardRequest $request, Options $options)
     {
-        $rawResult = parent::httpClient()->post($options->getBaseUrl() . "/cardstorage/card", parent::getHttpHeaders($request, $options), $request->toJsonString());
+        $rawResult = parent::httpClient()->post($options->getBaseUrl() . self::URL, parent::getHttpHeadersV2(self::URL, $request, $options), $request->toJsonString());
         return CardMapper::create($rawResult)->jsonDecode()->mapCard(new Card());
     }
 
     public static function delete(DeleteCardRequest $request, Options $options)
     {
-        $rawResult = parent::httpClient()->delete($options->getBaseUrl() . "/cardstorage/card", parent::getHttpHeaders($request, $options), $request->toJsonString());
+        $rawResult = parent::httpClient()->delete($options->getBaseUrl() . self::URL, parent::getHttpHeadersV2(self::URL, $request, $options), $request->toJsonString());
         return CardMapper::create($rawResult)->jsonDecode()->mapCard(new Card());
     }
 
@@ -92,6 +94,16 @@ class Card extends IyzipayResource
     public function setBinNumber($binNumber)
     {
         $this->binNumber = $binNumber;
+    }
+
+    public function getLastFourDigits()
+    {
+        return $this->lastFourDigits;
+    }
+
+    public function setLastFourDigits($lastFourDigits)
+    {
+        $this->lastFourDigits = $lastFourDigits;
     }
 
     public function getCardType()

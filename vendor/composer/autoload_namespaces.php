@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Orangehill\\Iseed' => array($vendorDir . '/orangehill/iseed/src'),
-    'Mockery' => array($vendorDir . '/mockery/mockery/library'),
     'Milon\\Barcode' => array($vendorDir . '/milon/barcode/src'),
     'Mcamara\\LaravelLocalization' => array($vendorDir . '/mcamara/laravel-localization/src'),
     'Laracasts\\Flash' => array($vendorDir . '/laracasts/flash/src'),

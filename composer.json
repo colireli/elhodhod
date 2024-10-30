@@ -9,11 +9,10 @@
     "license": "MIT",
     "repositories": [
         {
-            "type": "path",
-            "url": "prePackages/spatie/",
-            "options": {
-                "symlink": false
-            }
+
+            "type": "composer",
+            "url": "https://satis.spatie.be"
+
         }
     ],
     "require": {
