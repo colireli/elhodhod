@@ -22,7 +22,7 @@
         @php 
             $model = App\Models\Settings::where('group', 'general')->where('name','system_logo')->first();
         @endphp
-        <link rel="shortcut icon" href="{{ $model->getFirstMediaUrl('system_logo') ? $model->getFirstMediaUrl('system_logo') : asset('assets/lte/media/logos/favicon.png') }}" />
+        <link rel="shortcut icon" href="{{ asset('assets/lte/media/logos/favicon.ico') ? asset('assets/lte/media/logos/favicon.ico') : asset('assets/lte/media/logos/favicon.png') }}" />
 
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">

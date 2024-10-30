@@ -14,7 +14,7 @@
     @php 
         $model = App\Models\Settings::where('group', 'general')->where('name','system_logo')->first();
     @endphp
-    <link rel="shortcut icon" href="{{ $model->getFirstMediaUrl('system_logo') ? $model->getFirstMediaUrl('system_logo') : asset('assets/lte/media/logos/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('assets/lte/media/logos/favicon.ico') ? asset('assets/lte/media/logos/favicon.ico') : asset('assets/lte/media/logos/favicon.ico') }}" />
     
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:title" content="@yield('page-title') | {{ get_general_setting('website_title', config('app.name')) }}">
