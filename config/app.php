@@ -203,7 +203,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
 
-        Barryvdh\Debugbar\ServiceProvider::class, // for debug
+        //Barryvdh\Debugbar\ServiceProvider::class, // for debug
         Unicodeveloper\Paystack\PaystackServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
