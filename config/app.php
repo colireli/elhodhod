@@ -203,7 +203,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
 
-        //Barryvdh\Debugbar\ServiceProvider::class, // for debug
+        Barryvdh\Debugbar\ServiceProvider::class, // for debug
         Unicodeveloper\Paystack\PaystackServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
@@ -271,7 +271,7 @@ return [
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
 
-        //'Debugbar' => Barryvdh\Debugbar\Facade::class, // for debug
+        'Debugbar' => Barryvdh\Debugbar\Facade::class, // for debug
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
