@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Qirolab\Theme\Theme;
-//use Barryvdh\Debugbar\Facade as Debugbar;
+use Barryvdh\Debugbar\Facade as Debugbar;
 use Nwidart\Modules\Facades\Module;
 use Modules\Localization\Entities\Language;
 
