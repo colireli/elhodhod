@@ -157,6 +157,19 @@ return [
             
         ],
 
+        'covered stopdesk' => [ // this group is required if you want add any module setting, because the permissions are created under this group with the same name (setting)
+            'add-covered-countries',
+            'add-covered-regions',
+
+            'manage-stopdesks',
+            'view-stopdesks',
+            'create-stopdesks',
+            'edit-stopdesks',
+            'delete-stopdesks',
+            'export-table-stopdesks',
+            
+        ],
+
         'reports' => [ // this group is required if you want add any module setting, because the permissions are created under this group with the same name (setting)
             'shipments-report',
             'missions-report',

@@ -16,7 +16,7 @@
         </div>
         <!--begin::Card header-->
 
-        <form id="form1" class="form" action="{{ route('admin.plan.updatearea') }}"  method="POST">
+        <form id="form1" class="form" action="{{ route('admin.plan.updatestopdesk') }}"  method="POST">
         @csrf
         <!-- redirect_input -->
         <div class="card-body">
@@ -28,10 +28,10 @@
 
                     <tr>
                         <th>#</th>
-                        <th width="20%">{{__('Area')}}</th>
+                        <th width="20%">{{__('Stop Desk')}}</th>
                         <th width="20%">{{__('Company')}}</th>
-                        <th width="20%">{{__('Home Fee')}}</th>
-                        <!-- <th width="20%">{{__('Desk Fee')}}</th> -->
+                        <!-- <th width="20%">{{__('Home Fee')}}</th> -->
+                        <th width="20%">{{__('Desk Fee')}}</th>
                         <th width="20%">{{__('Return Fee')}}</th>
                         <th width="20%">{{__('Insurance')}}&ensp; %</th>
                         <th width="10%">{{__('Active')}}</th>
@@ -42,12 +42,12 @@
                     @php
                     $i = 1;
                     @endphp
-                    @foreach ($planFee->areas as $fee)
+                    @foreach ($planFee->stopdesks as $fee)
                     <tr>
                         <td>{{ $i }}</td>
-                        <td class="key">{{ $fee->area->name }}
+                        <td class="key">{{ $fee->stopdesk->name }}
                             <a class="btn btn-sm btn-secondary btn-action-table"
-                               href="{{ route('areas.edit', $fee->area->id) }}" title="{{ __('Edit') }}">
+                               href="{{ route('stopdesks.edit', $fee->stopdesk->id) }}" title="{{ __('Edit') }}">
                                 <i class="fas fa-edit fa-fw"></i>
                             </a> 
                         </td> 
@@ -67,14 +67,14 @@
                             </select>
                         </div>
                         </td>
-                        <td>
-                            <input type="number" class="form-control value" style="width:100%"
-                                name="home[{{ $fee->id }}]" value="{{ $fee->home_fee }}">
-                        </td>
                         <!-- <td>
                             <input type="number" class="form-control value" style="width:100%"
-                                name="desk[{{ $fee->id }}]" value="{{ $fee->desk_fee }}">
+                                name="home[{{ $fee->id }}]" value="{{ $fee->home_fee }}">
                         </td> -->
+                        <td>
+                            <input type="number" class="form-control value" style="width:100%"
+                                name="desk[{{ $fee->id }}]" value="{{ $fee->desk_fee }}">
+                        </td>
                         <td>
                             <input type="number" class="form-control value" style="width:100%"
                                 name="return[{{ $fee->id }}]" value="{{ $fee->return_fee }}">
@@ -100,7 +100,7 @@
 
         </div>
     </form>
-    <form action="{{ route('admin.plan.updatearea') }}" id="form2" method="POST">
+    <form action="{{ route('admin.plan.updatestopdesk') }}" id="form2" method="POST">
         @csrf
         <!-- redirect_input -->
         <input type="hidden" name="branch_id" value="{{$plan->branch_id}}">

@@ -46,6 +46,9 @@ if (\Illuminate\Support\Facades\Schema::hasTable('translations') && check_module
             Route::get('/countries/ajax-get-areas','CountryController@ajaxGetAreas')->name('ajax.getAreas');
             Route::get('/countries/ajax-get-areas_','CountryController@ajaxGetAreas_')->name('ajax.getAreas_');
 
+            Route::get('/countries/ajax-get-stopdesks','CountryController@ajaxGetStopDesks')->name('ajax.getStopDesks');
+            Route::get('/countries/ajax-get-stopdesks_','CountryController@ajaxGetStopDesks_')->name('ajax.getStopDesks_');
+
             // Shipment Estimation Cost Route
             Route::post('shipments/get-estimation-cost','ShipmentController@ajaxGetEstimationCost')->name('shipments.get-estimation-cost');
             Route::post('shipments/get-barcode','ShipmentController@ajaxGetbarcode')->name('shipment.get.one.barcode');
@@ -153,13 +156,15 @@ if (\Illuminate\Support\Facades\Schema::hasTable('translations') && check_module
                 //Plan
                 Route::get('/plan/{id}/showarea', 'PlanController@showArea')->name('admin.plan.showarea');
                 Route::post('/plan/update', 'PlanController@updateArea')->name('admin.plan.updatearea');
+                Route::get('/plan/{id}/showstopdesk', 'PlanController@showStopDesk')->name('admin.plan.showstopdesk');
+                Route::post('/plan/update', 'PlanController@updateStopDesk')->name('admin.plan.updatestopdesk');
                 Route::resource('plan', 'PlanController', ['as' => 'admin']);
                 Route::get('/plan_destroy','PlanController@destroy')->name('admin.plan.destroy');
                 Route::resource('company_plan', 'CompanyPlanController', ['as' => 'admin']);
                 Route::get('/company_plan_destroy', 'CompanyPlanController@destroy')->name('admin.company_plan.destroy');
                 Route::get('plan-for-company/{id}', 'CompanyPlanController@plan_for_company')->name('admin.plan-for-company');
                 Route::get('/plan-createArea', 'PlanController@createArea')->name('admin.plan.createArea');
-
+                Route::get('/plan-createStopDesk', 'PlanController@createStopDesk')->name('admin.plan.createStopDesk');
                 
                 // Route::get('get-states-ajax', 'CompanyPlanController@getStates')->name('admin.shipments.get-states-ajax');
 
@@ -336,6 +341,9 @@ if (\Illuminate\Support\Facades\Schema::hasTable('translations') && check_module
             Route::delete('/areas-multi-destroy', 'AreaController@multiDestroy')->name('areas.multi-destroy');
             Route::resource('areas','AreaController');
 
+            Route::delete('/stopdesks-multi-destroy', 'StopDeskController@multiDestroy')->name('stopdesks.multi-destroy');
+            Route::resource('stopdesks','StopDeskController');
+
             // Staff Routes
             Route::delete('/staffs-multi-destroy', 'StaffController@multiDestroy')->name('staffs.multi-destroy');
             Route::resource('staffs','StaffController');
@@ -404,6 +412,9 @@ if (\Illuminate\Support\Facades\Schema::hasTable('translations') && check_module
         Route::get('/countries/ajax-get-states','CountryController@ajaxGetStates')->name('ajax.getStates');
         Route::get('/countries/ajax-get-areas','CountryController@ajaxGetAreas')->name('ajax.getAreas');
         Route::get('/countries/ajax-get-areas_','CountryController@ajaxGetAreas_')->name('ajax.getAreas_');
+
+        Route::get('/countries/ajax-get-stopdesks','CountryController@ajaxGetStopDesks')->name('ajax.getStopDesks');
+        Route::get('/countries/ajax-get-stopdesks_','CountryController@ajaxGetStopDesks_')->name('ajax.getStopDesks_');
 
 
         // Shipment Estimation Cost Route
@@ -625,6 +636,9 @@ if (\Illuminate\Support\Facades\Schema::hasTable('translations') && check_module
         // Area Routes
         Route::delete('/areas-multi-destroy', 'AreaController@multiDestroy')->name('areas.multi-destroy');
         Route::resource('areas','AreaController');
+
+        Route::delete('/stopdesks-multi-destroy', 'StopDeskController@multiDestroy')->name('stopdesks.multi-destroy');
+        Route::resource('stopdesks','StopDeskController');
 
         // Staff Routes
         Route::delete('/staffs-multi-destroy', 'StaffController@multiDestroy')->name('staffs.multi-destroy');

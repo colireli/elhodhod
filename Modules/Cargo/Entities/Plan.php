@@ -34,6 +34,11 @@ class Plan extends Model
         return $this->hasMany(PlanAreaFee::class);
     }
 
+    public function stopdesks(): HasMany
+    {
+        return $this->hasMany(PlanStopDeskFee::class);
+    }
+
     // END_CODE
 
 }

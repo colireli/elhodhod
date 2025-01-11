@@ -8,6 +8,7 @@ use Modules\Cargo\Entities\Plan;
 //  START_CODE
 use Modules\Cargo\Entities\Company;
 use Modules\Cargo\Entities\PlanAreaFee;
+use Modules\Cargo\Entities\PlanStopDeskFee;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 // END_CODE
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -59,6 +60,11 @@ class PlanFee extends Model
     public function areas(): HasMany
     {
         return $this->hasMany(PlanAreaFee::class);
+    }
+
+    public function stopdesks(): HasMany
+    {
+        return $this->hasMany(PlanStopDeskFee::class);
     }
     // END_CODE
 }

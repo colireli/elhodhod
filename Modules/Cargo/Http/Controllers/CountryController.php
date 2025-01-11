@@ -119,17 +119,16 @@ class CountryController extends Controller
     {
 
         $plan = Client::find($request->client_id);
-        $areas = PlanFee::with(['areas' => function ($query) {
+        $areas = PlanFee::with(['stopdesks' => function ($query) {
             $query
             ->where('desk_fee',">","0")
             ->where('active',"1")
-            ->orderBy('area_id');
+            ->orderBy('stopdesk_id');
         }])
         ->where('state_id',(string) $request->state_id)
         ->where('plan_id',(string) $plan->plan_id)
         ->where('active',"1")->first();
-
-
+        
         return response()->json($areas);
     }
 

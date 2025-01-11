@@ -26,6 +26,7 @@ use Modules\Cargo\Entities\ShipmentReason;
 use Modules\Cargo\Entities\Country;
 use Modules\Cargo\Entities\State;
 use Modules\Cargo\Entities\Area;
+use Modules\Cargo\Entities\StopDesk;
 use Modules\Cargo\Entities\Staff;
 use Modules\Cargo\Entities\ClientAddress;
 use Modules\Cargo\Entities\DeliveryTime;
@@ -33,6 +34,7 @@ use Modules\Cargo\Entities\Branch;
 use Modules\Cargo\Entities\BusinessSetting;
 use Modules\Cargo\Entities\PlanFee;
 use Modules\Cargo\Entities\PlanAreaFee;
+use Modules\Cargo\Entities\PlanStopDeskFee;
 use Modules\Cargo\Entities\ApiModel;
 use Modules\Cargo\Entities\Company;
 use Modules\Cargo\Entities\CompanyPlanFee;
@@ -256,8 +258,12 @@ class ShipmentController extends Controller
                     if($request->Shipment['type'] != Shipment::POSTPAID && $request->Shipment['type'] != Shipment::PREPAID ){
                         $model->type = 1;
                     }
+                    if(!isset($request->Shipment['delivery_type']) || $request->Shipment['delivery_type'] == 1){
+                        $model->to_area_id = Area::where('name' , ShipmentActionHelper::getClosestMatch($request->Shipment['to_area_id'],$userClient->id, $request->Shipment['to_state_id']))->where('state_id', $request->Shipment['to_state_id'])->pluck('id')->first();
 
-                    $model->to_area_id = Area::where('name' , ShipmentActionHelper::getClosestMatch($request->Shipment['to_area_id'],$userClient->id, $request->Shipment['to_state_id']))->where('state_id', $request->Shipment['to_state_id'])->pluck('id')->first();
+                    }else{ 
+                        $model->to_area_id = StopDesk::where('stopdesk_id' , $request->Shipment['to_area_id'])->where('state_id', $request->Shipment['to_state_id'])->pluck('id')->first();
+                    }
                     if(!$model->to_area_id){
                         return  __('invalid area name') ;
                     }
@@ -883,6 +889,17 @@ class ShipmentController extends Controller
                             }
                         }
 
+                        if($request->columns[$i] == 'stopdesk'){
+                            if($row[$i] != ""){ 
+                                $new_shipment['to_area_id']  = StopDesk::where('stopdesk_id' ,$row[$i])->pluck('id')->first();
+                            }
+
+                            if(!isset($new_shipment['to_area_id']) || empty($new_shipment['to_area_id'])){
+
+                                $error_message = __('invalid_area') ;
+                            // return redirect()->route('shipments.import')->with(['error_message_alert' => __('cargo::view.invalid_area')]);
+                            }
+                        }
 
                         if($request->columns[$i] == 'to_area'){
                             $new_shipment['to_area_id']  = Area::where('name' , ShipmentActionHelper::getClosestMatch($row[$i],$client->id, $row[$i-1]))->where('state_id', $row[$i-1])->pluck('id')->first();
@@ -1411,8 +1428,11 @@ class ShipmentController extends Controller
             $covered = PlanFee::where('state_id', $shipment->to_state_id)->where('plan_id', $clientx->plan_id)->where('active', 1)->first();
 
             if($covered){
-
-                $covered = PlanAreaFee::where('plan_fee_id', $covered->id)->where('area_id', $shipment->to_area_id)->where('active', 1)->first();
+                if($shipment->delivery_type == Shipment::DESK){
+                    $covered = PlanStopDeskFee::where('plan_fee_id', $covered->id)->where('stopdesk_id', $shipment->to_area_id)->where('active', 1)->first();
+                }else{
+                    $covered = PlanAreaFee::where('plan_fee_id', $covered->id)->where('area_id', $shipment->to_area_id)->where('active', 1)->first();
+                }
             }
             if($covered && $covered->company != 0){
                 $_company = Company::find($covered->company);
