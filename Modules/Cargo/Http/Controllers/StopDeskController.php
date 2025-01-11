@@ -24,12 +24,12 @@ class StopDeskController extends Controller
     {
         $this->aclRepo = $aclRepository;
         // check on permissions
-        $this->middleware('can:manage-stopdesks');
-        $this->middleware('can:view-stopdesks')->only('index');
-        $this->middleware('can:view-stopdesks')->only('show');
-        $this->middleware('can:create-stopdesks')->only('create', 'store');
-        $this->middleware('can:edit-stopdesks')->only('edit', 'update');
-        $this->middleware('can:delete-stopdesks')->only('delete', 'multiDestroy');
+        // $this->middleware('can:manage-stopdesks');
+        // $this->middleware('can:view-stopdesks')->only('index');
+        // $this->middleware('can:view-stopdesks')->only('show');
+        // $this->middleware('can:create-stopdesks')->only('create', 'store');
+        // $this->middleware('can:edit-stopdesks')->only('edit', 'update');
+        // $this->middleware('can:delete-stopdesks')->only('delete', 'multiDestroy');
     }
 
     /**
