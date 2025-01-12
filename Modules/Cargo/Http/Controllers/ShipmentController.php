@@ -262,7 +262,7 @@ class ShipmentController extends Controller
                         $model->to_area_id = Area::where('name' , ShipmentActionHelper::getClosestMatch($request->Shipment['to_area_id'],$userClient->id, $request->Shipment['to_state_id']))->where('state_id', $request->Shipment['to_state_id'])->pluck('id')->first();
 
                     }else{ 
-                        $model->to_area_id = StopDesk::where('stopdesk_id' , $request->Shipment['to_area_id'])->where('state_id', $request->Shipment['to_state_id'])->pluck('id')->first();
+                        $model->to_area_id = StopDesk::where('reference' , $request->Shipment['to_area_id'])->where('state_id', $request->Shipment['to_state_id'])->pluck('id')->first();
                     }
                     if(!$model->to_area_id){
                         return  __('invalid area name') ;
@@ -891,7 +891,7 @@ class ShipmentController extends Controller
 
                         if($request->columns[$i] == 'stopdesk'){
                             if($row[$i] != ""){ 
-                                $new_shipment['to_area_id']  = StopDesk::where('stopdesk_id' ,$row[$i])->pluck('id')->first();
+                                $new_shipment['to_area_id']  = StopDesk::where('reference' ,$row[$i])->pluck('id')->first();
                             }
 
                             if(!isset($new_shipment['to_area_id']) || empty($new_shipment['to_area_id'])){
@@ -2172,6 +2172,7 @@ class ShipmentController extends Controller
                     $apiModel->poids        => (int) $model->total_weight,
                     $apiModel->stop_desk    => ($model->delivery_type == Shipment::DESK) ? 1 : 0,
                     $apiModel->stock        => 0,
+                    $apiModel->ref_stopdesk => StopDesk::find($model->to_area_id)->reference,
 
                 ];
 

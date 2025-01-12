@@ -115,6 +115,11 @@
                     <label>stop_desk :</label>
                     <input type="text" id="stop_desk" class="form-control" placeholder="{{__('stop_desk')}}" name="apiModel[stop_desk]">
                 </div>
+                
+                <div class="form-group">
+                    <label>reference stop desk :</label>
+                    <input type="text" id="ref_stopdesk" class="form-control" placeholder="{{__('ref_stopdesk')}}" name="apiModel[ref_stopdesk]">
+                </div>
 
                 <div class="form-group">
                     <label>stock :</label>

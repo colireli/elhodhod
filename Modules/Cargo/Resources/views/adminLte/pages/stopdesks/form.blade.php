@@ -78,27 +78,27 @@
         <!--begin::Input group-->
         <div class="col-md-12 fv-row form-group">
             <!--begin::Label-->
-            <label class="col-form-label required fw-bold fs-6">{{ __('API') }}</label>
+            <label class="col-form-label required fw-bold fs-6">{{ __('Company') }}</label>
             <!--end::Label-->
             <select
-                class="form-control  @error('api_id') is-invalid @enderror"
-                name="country_id"
+                class="form-control  @error('company_id') is-invalid @enderror"
+                name="company_id"
                 data-control="select2"
-                data-placeholder="{{ __('cargo::view.choose_country') }}"
+                data-placeholder="{{ __('choosen company') }}"
                 data-allow-clear="true"
-                id="change-model"
+                id="change-company"
             >
                 <option></option>
-                @foreach($apiModels as $apiModel)
-                    <option value="{{ $apiModel->id }}" 
-                        {{ old('model_id') == $apiModel->id ? 'selected' : '' }}
+                @foreach($companies as $company)
+                    <option value="{{ $company->id }}" 
+                        {{ old('company_id') == $company->id ? 'selected' : '' }}
                         @if($typeForm == 'edit')
-                            {{ $model->model_id == $apiModel->id ? 'selected' : '' }}
+                            {{ $model->company_id == $company->id ? 'selected' : '' }}
                         @endif
-                    >{{ $apiModel->name }}</option>
+                    >{{ $company->name }}</option>
                 @endforeach
             </select>
-            @error('model_id') 
+            @error('company_id') 
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
@@ -107,11 +107,12 @@
         <!--end::Input group-->
     </div>
     <!--end::Input group-->
-
+    
+    <div class="row mb-6">
     <!--begin::Input group-->
     <div class="col-lg-12 fv-row">
         <!--begin::Label-->
-        <label class="col-form-label required fw-bold fs-6">{{ __('stopdesk name') }}</label>
+        <label class="col-form-label required fw-bold fs-6">{{ __('Name') }}</label>
         <!--end::Label-->
         <div class="input-group lang_container" id="lang_container_name">
             
@@ -120,14 +121,30 @@
                 placeholder="{{ __('cargo::view.table.name') }}"
                 name="name"
                 title="stopdesk"
-                class="form-control section-title form-control-multilingual is-invalid"
+                class="form-control section-title form-control-multilingual "
                 value="{{ isset($model) && isset($model->name ) ? $model->name : '' }}"
             >
         </div>
     </div>
     <div class="col-lg-12 fv-row">
         <!--begin::Label-->
-        <label class="col-form-label required fw-bold fs-6">{{ __('phone') }}</label>
+        <label class="col-form-label required fw-bold fs-6">{{ __('Reference') }}</label>
+        <!--end::Label-->
+        <div class="input-group lang_container" id="lang_container_name">
+            
+            <input
+                type="text"
+                placeholder="{{ __('reference') }}"
+                name="reference"
+                title="reference"
+                class="form-control section-title form-control-multilingual "
+                value="{{ isset($model) && isset($model->reference ) ? $model->reference : '' }}"
+            >
+        </div>
+    </div>
+    <div class="col-lg-12 fv-row">
+        <!--begin::Label-->
+        <label class="col-form-label required fw-bold fs-6">{{ __('Phone') }}</label>
         <!--end::Label-->
         <div class="input-group lang_container" id="lang_container_phone">
             
@@ -135,15 +152,15 @@
                 type="text"
                 placeholder="{{ __('phone') }}"
                 name="phone"
-                title="stopdesk"
-                class="form-control section-title form-control-multilingual is-invalid"
+                title="phone"
+                class="form-control section-title form-control-multilingual "
                 value="{{ isset($model) && isset($model->phone ) ? $model->phone : '' }}"
             >
         </div>
     </div>
     <div class="col-lg-12 fv-row">
         <!--begin::Label-->
-        <label class="col-form-label required fw-bold fs-6">{{ __('address') }}</label>
+        <label class="col-form-label required fw-bold fs-6">{{ __('Address') }}</label>
         <!--end::Label-->
         <div class="input-group lang_container" id="lang_container_addr">
             
@@ -151,8 +168,8 @@
                 type="text"
                 placeholder="{{ __('address') }}"
                 name="address"
-                title="stopdesk"
-                class="form-control section-title form-control-multilingual is-invalid"
+                title="address"
+                class="form-control section-title form-control-multilingual "
                 value="{{ isset($model) && isset($model->address ) ? $model->address : '' }}"
             >
         </div>

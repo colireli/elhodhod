@@ -22,6 +22,7 @@ class StopDesksDataTable extends DataTable
 
     public $filters = [
         'state_id',
+        'company_id',
     ];
 
     /**
@@ -42,7 +43,9 @@ class StopDesksDataTable extends DataTable
             ->filterColumn('state_id', function($query, $keyword) {
                 $query->where('state_id', 'LIKE', "%$keyword%");
             })
-
+            ->filterColumn('company_id', function($query, $keyword) {
+                $query->where('company_id', 'LIKE', "%$keyword%");
+            })
             ->orderColumn('name', function ($query, $order) {
                 $query->orderBy('name', $order);
             })
@@ -56,6 +59,12 @@ class StopDesksDataTable extends DataTable
             })
             ->editColumn('name', function (StopDesk $model) {
                 return $model->name;
+            })
+            ->editColumn('reference', function (StopDesk $model) {
+                return $model->reference;
+            })
+            ->editColumn('phone', function (StopDesk $model) {
+                return $model->phone;
             })
             ->editColumn('state_id', function (StopDesk $model) {
                 return $model->state->name;
@@ -140,6 +149,8 @@ class StopDesksDataTable extends DataTable
                     ->width(50),
             Column::make('id')->title(__('cargo::view.table.#'))->width(50),
             Column::make('name')->title(__('stop desk')),
+            Column::make('reference')->title(__('reference')),
+            Column::make('phone')->title(__('phone')),
             Column::make('country_id')->title(__('cargo::view.country')),
             Column::make('state_id')->title(__('cargo::view.table.region')),
             Column::make('created_at')->title(__('view.created_at')),

@@ -117,6 +117,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label>reference stop desk :</label>
+                    <input type="text" id="ref_stopdesk" class="form-control" placeholder="{{__('ref_stopdesk')}}" value="{{$apiModel->ref_stopdesk}}" name="apiModel[ref_stopdesk]">
+                </div>
+
+                <div class="form-group">
                     <label>stock :</label>
                     <input type="text" id="stock" class="form-control" placeholder="{{__('stock')}}" value="{{$apiModel->stock}}" name="apiModel[stock]">
                 </div>

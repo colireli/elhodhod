@@ -10,7 +10,7 @@ use Modules\Cargo\Http\Requests\PackageRequest;
 use Modules\Cargo\Entities\Package;
 use Modules\Cargo\Entities\Country;
 use Modules\Cargo\Entities\State;
-use Modules\Cargo\Entities\ApiModel;
+use Modules\Cargo\Entities\Company;
 use Modules\Cargo\Entities\StopDesk;
 use Modules\Cargo\Entities\PlanStopDeskFee;
 use Modules\Cargo\Http\Requests\StopDeskRequest;
@@ -77,8 +77,8 @@ class StopDeskController extends Controller
             ],
         ]);
         $countries = Country::where('covered',1)->get();
-        $apiModels = ApiModel::where('is_archived', 0)->get();
-        $adminTheme = env('ADMIN_THEME', 'adminLte');return view('cargo::'.$adminTheme.'.pages.stopdesks.create', compact('countries','apiModels'));
+        $companies = Company::where('is_archived', 0)->get();
+        $adminTheme = env('ADMIN_THEME', 'adminLte');return view('cargo::'.$adminTheme.'.pages.stopdesks.create', compact('countries','companies'));
     }
 
     /**
@@ -88,7 +88,7 @@ class StopDeskController extends Controller
      */
     public function store(StopDeskRequest $request)
     {
-        $data = $request->only(['state_id','country_id','name']);
+        $data = $request->only(['state_id','country_id','company_id','name','phone','address','reference']);
         // $data['name'] = json_encode($request->name);
         $stopdesk = StopDesk::create($data);
         return redirect()->route('stopdesks.index')->with(['message_alert' => __('cargo::messages.created')]);
@@ -127,7 +127,8 @@ class StopDeskController extends Controller
         $countries = Country::where('covered',1)->get();
         $stopdesk   = StopDesk::findOrFail($id);
         $states = State::where('country_id',$stopdesk->state->country_id)->where('covered',1)->get();
-        $adminTheme = env('ADMIN_THEME', 'adminLte');return view('cargo::'.$adminTheme.'.pages.stopdesks.edit')->with(['model' => $stopdesk, 'countries' => $countries , 'states' => $states]);
+        $companies = Company::where('is_archived', 0)->get();
+        $adminTheme = env('ADMIN_THEME', 'adminLte');return view('cargo::'.$adminTheme.'.pages.stopdesks.edit')->with(['model' => $stopdesk, 'countries' => $countries , 'states' => $states,'companies' => $companies]);
     }
 
     /**
@@ -143,7 +144,7 @@ class StopDeskController extends Controller
         }
 
         $stopdesk = StopDesk::findOrFail($id);
-        $data = $request->only(['name', 'country_id','state_id']);
+        $data = $request->only(['state_id','country_id','company_id','name','phone','address','reference']);
         $data['name'] = json_encode($request->name);
         $stopdesk->update($data);
         return redirect()->route('stopdesks.index')->with(['message_alert' => __('cargo::messages.saved')]);

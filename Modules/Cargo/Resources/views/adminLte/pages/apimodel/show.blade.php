@@ -87,6 +87,10 @@
                                             <td>{{$apiModel->stop_desk}}</td>
                                         </tr>
                                         <tr>
+                                            <td>ref_stopdesk</td>
+                                            <td>{{$apiModel->ref_stopdesk}}</td>
+                                        </tr>
+                                        <tr>
                                             <td>stock</td>
                                             <td>{{$apiModel->stock}}</td>
                                         </tr>
