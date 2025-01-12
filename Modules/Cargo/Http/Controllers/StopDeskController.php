@@ -10,6 +10,7 @@ use Modules\Cargo\Http\Requests\PackageRequest;
 use Modules\Cargo\Entities\Package;
 use Modules\Cargo\Entities\Country;
 use Modules\Cargo\Entities\State;
+use Modules\Cargo\Entities\ApiModel;
 use Modules\Cargo\Entities\StopDesk;
 use Modules\Cargo\Entities\PlanStopDeskFee;
 use Modules\Cargo\Http\Requests\StopDeskRequest;
@@ -68,15 +69,16 @@ class StopDeskController extends Controller
                 'path' => fr_route('admin.dashboard')
             ],
             [
-                'name' => __('cargo::view.stopdesks_management'),
+                'name' => __('stopdesks management'),
                 'path' => fr_route('stopdesks.index')
             ],
             [
-                'name' => __('cargo::view.add_stopdesk'),
+                'name' => __('add stopdesk'),
             ],
         ]);
         $countries = Country::where('covered',1)->get();
-        $adminTheme = env('ADMIN_THEME', 'adminLte');return view('cargo::'.$adminTheme.'.pages.stopdesks.create', compact('countries'));
+        $apiModels = ApiModel::where('is_archived', 0)->get();
+        $adminTheme = env('ADMIN_THEME', 'adminLte');return view('cargo::'.$adminTheme.'.pages.stopdesks.create', compact('countries','apiModels'));
     }
 
     /**

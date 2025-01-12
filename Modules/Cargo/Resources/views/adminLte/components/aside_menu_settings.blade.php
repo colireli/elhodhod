@@ -24,6 +24,16 @@ $admin = 1;
     </li>
 @endif
 
+@if (auth()->user()->can('manage-areas') || $user_role == $admin)
+    <li class="nav-item {{ areActiveRoutes(['stopdesks.index'], 'menu-is-opening menu-open active') }}">
+        <a href="{{ fr_route('stopdesks.index') }}"
+            class="nav-link {{ areActiveRoutes(['stopdesks.index'], 'menu-is-opening menu-open active') }}">
+            <i class="fas fa-directions fa-fw"></i>
+            <p>{{ __('Stop Desk management') }}</p>
+        </a>
+    </li>
+@endif
+
 {{--
 @if (auth()->user()->can('manage-delivery-time') || $user_role == $admin)
     <li class="nav-item {{ areActiveRoutes(['deliveryTime.index'], 'menu-is-opening menu-open active') }}">

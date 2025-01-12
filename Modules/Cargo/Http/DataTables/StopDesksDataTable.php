@@ -139,7 +139,7 @@ class StopDesksDataTable extends DataTable
                     ->addClass('not-export')
                     ->width(50),
             Column::make('id')->title(__('cargo::view.table.#'))->width(50),
-            Column::make('name')->title(__('cargo::view.table.stopdesk')),
+            Column::make('name')->title(__('stop desk')),
             Column::make('country_id')->title(__('cargo::view.country')),
             Column::make('state_id')->title(__('cargo::view.table.region')),
             Column::make('created_at')->title(__('view.created_at')),

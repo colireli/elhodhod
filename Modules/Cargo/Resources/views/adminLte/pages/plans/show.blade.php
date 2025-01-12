@@ -26,13 +26,15 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th width="20%">{{__('State')}}</th>
-                        <th width="20%">{{__('Company')}}</th>
-                        <th width="20%">{{__('Home Fee')}}</th>
-                        <th width="20%">{{__('Desk Fee')}}</th>
-                        <th width="20%">{{__('Return Fee')}}</th>
-                        <th width="20%">{{__('Insurance')}}&ensp; %</th>
-                        <th width="10%">{{__('Active')}}</th>
+                        <th width="15%">{{__('State')}}</th>
+                        <th width="15%">{{__('Home')}}</th>
+                        <th width="15%">{{__('Stop Desk')}}</th>
+                        <th width="15%">{{__('Company')}}</th>
+                        <th width="15%">{{__('Home Fee')}}</th>
+                        <th width="15%">{{__('Desk Fee')}}</th>
+                        <th width="15%">{{__('Return Fee')}}</th>
+                        <th width="15%">{{__('Insurance')}}&ensp; %</th>
+                        <th width="5%">{{__('Active')}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,11 +44,16 @@
                     @foreach ($plan->fees as $fee)
                     <tr>
                         <td>{{ $i }}</td>
+                        <td><span> {{ $fee->state->name }} </span></td>
                         <td class="key"> 
-                            <a href="{{ route('admin.plan.showarea', $fee->id) }}"> {{ $fee->state->name }}</a>
+                            
+                            <a href="{{ route('admin.plan.showarea', $fee->id) }}"> {{ __('Home') }}</a>
                             <button type="button" class="btn btn-sm btn-secondary btn-action-table" onclick="openCreateModel({{$fee->id}}, '{{ $fee->state->name }}')" title="{{ __('view.create') }}">
                                 <i class="fas fa-add fa-fw"></i>
                             </button>
+                        </td>
+                        <td>
+                            <a href="{{ route('admin.plan.showstopdesk', $fee->id) }}"> {{ __('Stop Desk') }}</a>
                         </td>
                         <td>
                         <div class="form-group">

@@ -1,7 +1,7 @@
 @extends('cargo::adminLte.layouts.master')
 
 @section('pageTitle')
-    {{ __('cargo::view.create_new_stopdesk') }}
+    {{ __('create new stopdesk') }}
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
         <div class="card-header">
             <!--begin::Card title-->
             <div class="card-title m-0">
-                <h3 class="fw-bolder m-0">{{ __('cargo::view.create_new_stopdesk') }}</h3>
+                <h3 class="fw-bolder m-0">{{ __('create new stopdesk') }}</h3>
             </div>
             <!--end::Card title-->
         </div>

@@ -128,7 +128,7 @@ class PlanController extends Controller
         // edit_update_v1
         //  START_CODE
         $states = State::where('country_code','DZ')->pluck('id');
-
+        $company = Company::find($request->company);
 
         foreach ($states as $state) {
             $planfee = PlanFee::create([
@@ -162,7 +162,7 @@ class PlanController extends Controller
             }
             PlanAreaFee::insert($areaFees);
 
-            $stopdesks = StopDesk::where('state_id',$state)->pluck('id');
+            $stopdesks = StopDesk::where('state_id',$state)->where('model_id',$company->model_id)->pluck('id');
             $stopdeskFees = [];
             foreach ($stopdesks as $stopdesk) {
                 $stopdeskFees[] = [

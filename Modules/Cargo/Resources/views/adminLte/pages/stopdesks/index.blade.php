@@ -6,7 +6,7 @@
 @extends('cargo::adminLte.layouts.master')
 
 @section('pageTitle')
-    {{ __('cargo::view.stopdesk_list') }}
+    {{ __('stopdesk list') }}
 @endsection
 
 @section('content')
@@ -57,7 +57,7 @@
 
                     <!--begin::Add user-->
                     @if(auth()->user()->can('create-stopdesks') || $user_role == $admin)
-                        <a href="{{ fr_route('stopdesks.create') }}" class="btn btn-primary m-1">{{ __('cargo::view.add_stopdesk') }}</a>
+                        <a href="{{ fr_route('stopdesks.create') }}" class="btn btn-primary m-1">{{ __('Add') }}</a>
                     @endif
                     <!--end::Add user-->
                 </div>
