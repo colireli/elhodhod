@@ -392,12 +392,6 @@ class PlanController extends Controller
 
     // ----------------
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  Modules\Cargo\Entities\PlanFee  $planFee
-     * @return \Illuminate\Http\Response
-     */
     public function showStopDesk($id)
     {
         $planFee = PlanFee::with(['stopdesks' => function ($query) {
@@ -416,13 +410,6 @@ class PlanController extends Controller
 
     }
 
-    /**
-     * updateStopDesk the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Modules\Cargo\Entities\Plan  $plan
-     * @return \Illuminate\Http\Response
-     */
     public function updateStopDesk(Request $request)
     {
         // dd($request->all(), $plan);

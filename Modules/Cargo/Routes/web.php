@@ -157,7 +157,7 @@ if (\Illuminate\Support\Facades\Schema::hasTable('translations') && check_module
                 Route::get('/plan/{id}/showarea', 'PlanController@showArea')->name('admin.plan.showarea');
                 Route::post('/plan/update', 'PlanController@updateArea')->name('admin.plan.updatearea');
                 Route::get('/plan/{id}/showstopdesk', 'PlanController@showStopDesk')->name('admin.plan.showstopdesk');
-                Route::post('/plan/update', 'PlanController@updateStopDesk')->name('admin.plan.updatestopdesk');
+                Route::post('/plan/updatestopdesk', 'PlanController@updateStopDesk')->name('admin.plan.updatestopdesk');
                 Route::resource('plan', 'PlanController', ['as' => 'admin']);
                 Route::get('/plan_destroy','PlanController@destroy')->name('admin.plan.destroy');
                 Route::resource('company_plan', 'CompanyPlanController', ['as' => 'admin']);
