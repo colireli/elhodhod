@@ -287,13 +287,13 @@ class PlanController extends Controller
         // }
         $plan->title = $request->name;
         $plan->save();
-        foreach ($home as $key => $home_fee) {
+        foreach ($return as $key => $return_fee) {
             PlanFee::where('id', $key)
                 ->where('plan_id', $plan->id)
                 ->update([
-                    'home_fee' => $home_fee,
-                    'desk_fee' => $desk[$key],
-                    'return_fee' => $return[$key],
+                    'home_fee' => $home[$key]??0,
+                    'desk_fee' => $desk[$key]??0,
+                    'return_fee' => $return_fee,
                     'recovery_rate' => $recovery_rate[$key],
                     // add_update_v1
                     //  START_CODE
@@ -371,13 +371,13 @@ class PlanController extends Controller
             $company = $request->company;
             $active = $request->active;
 
-            foreach ($home as $key => $home_fee) {
+            foreach ($return as $key => $return_fee) {
                 PlanAreaFee::where('id', $key)
                     ->where('plan_fee_id', $request->plan_fee_id)
                     ->update([
-                        'home_fee' => $home_fee,
-                        'desk_fee' => $desk[$key],
-                        'return_fee' => $return[$key],
+                        'home_fee' => $home[$key]??0,
+                        'desk_fee' => $desk[$key]??0,
+                        'return_fee' => $return_fee,
                         'recovery_rate' => $recovery_rate[$key],
                         'company' => $company[$key],
                         'active' => isset($active[$key]) ? 1 : 0,
@@ -441,13 +441,13 @@ class PlanController extends Controller
             $company = $request->company;
             $active = $request->active;
 
-            foreach ($home as $key => $home_fee) {
+            foreach ($return as $key => $return_fee) {
                 PlanStopDeskFee::where('id', $key)
                     ->where('plan_fee_id', $request->plan_fee_id)
                     ->update([
-                        'home_fee' => $home_fee,
-                        'desk_fee' => $desk[$key],
-                        'return_fee' => $return[$key],
+                        'home_fee' => $home[$key]??0,
+                        'desk_fee' => $desk[$key]??0,
+                        'return_fee' => $return_fee,
                         'recovery_rate' => $recovery_rate[$key],
                         'company' => $company[$key],
                         'active' => isset($active[$key]) ? 1 : 0,
