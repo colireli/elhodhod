@@ -608,7 +608,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-form-label fw-bold fs-6 required">{{ __('cargo::view.to_area') }}</label>
+                    <label class="col-form-label fw-bold fs-6 required">{{ __('cargo::view.to_area') / __('stop desk')}}</label>
                     <select name="Shipment[to_area_id]" class="form-control select-area @error('Shipment.to_area_id') is-invalid @enderror">
                         <option value=""></option>
                         @if($typeForm == 'edit')
@@ -1626,8 +1626,8 @@
 
                 $('select[name ="Shipment[to_area_id]"]').empty();
                 $('select[name ="Shipment[to_area_id]"]').append('<option value=""></option>');
-                for (let index = 0; index < data['areas'].length; index++) {
-                    const element = data['areas'][index]['area'];
+                for (let index = 0; index < data['stopdesks'].length; index++) {
+                    const element = data['stopdesks'][index]['stopdesk'];
                     var old_to_area = {{old('Shipment.to_area_id') ? old('Shipment.to_area_id') : 'null'}};
                     if(old_to_area == element['id'] ){
                         $('select[name ="Shipment[to_area_id]"]').append('<option selected value="' + element['id'] + '">' + element['name'] + '</option>');

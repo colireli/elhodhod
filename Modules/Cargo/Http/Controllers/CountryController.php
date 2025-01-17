@@ -123,7 +123,7 @@ class CountryController extends Controller
             $query
             ->where('desk_fee',">","0")
             ->where('active',"1")
-            ->orderBy('reference');
+            ->orderBy('desk_fee');
         }])
         ->where('state_id',(string) $request->state_id)
         ->where('plan_id',(string) $plan->plan_id)

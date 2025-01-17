@@ -46,7 +46,7 @@ class StopDeskController extends Controller
                 'path' => fr_route('admin.dashboard')
             ],
             [
-                'name' => __('cargo::view.stopdesks_management'),
+                'name' => __('stopdesks management'),
             ],
         ]);
         $data_with = [];
@@ -117,11 +117,11 @@ class StopDeskController extends Controller
                 'path' => fr_route('admin.dashboard')
             ],
             [
-                'name' => __('cargo::view.stopdesks_management'),
+                'name' => __('stopdesks management'),
                 'path' => fr_route('stopdesks.index')
             ],
             [
-                'name' => __('cargo::view.edit_stopdesk'),
+                'name' => __('edit stopdesk'),
             ],
         ]);
         $countries = Country::where('covered',1)->get();

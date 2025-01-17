@@ -1,7 +1,7 @@
 @extends('cargo::adminLte.layouts.master')
 
 @section('pageTitle')
-    {{ __('cargo::view.edit_stopdesks') }} - {{$model->name}}
+    {{ __('edit stopdesks') }} - {{$model->name}}
 @endsection
 
 
@@ -14,7 +14,7 @@
         <div class="card-header">
             <!--begin::Card title-->
             <div class="card-title m-0">
-                <h3 class="fw-bolder m-0">{{ __('cargo::view.edit_stopdesk') }}</h3>
+                <h3 class="fw-bolder m-0">{{ __('edit stopdesk') }}</h3>
             </div>
             <!--end::Card title-->
 
