@@ -174,6 +174,71 @@
             >
         </div>
     </div>
+
+    <div class="col-lg-12 fv-row">
+        <!--begin::Label-->
+        <label class="col-form-label  fw-bold fs-6">{{ __('Phone commercial 2') }}</label>
+        <!--end::Label-->
+        <div class="input-group lang_container" id="lang_container_addr">
+            
+            <input
+                type="text"
+                placeholder="{{ __('Phone commercial 2') }}"
+                name="phone_commercial_2"
+                title="Phone commercial 2"
+                class="form-control section-title form-control-multilingual "
+                value="{{ isset($model) && isset($model->phone_commercial_2 ) ? $model->phone_commercial_2 : '' }}"
+            >
+        </div>
+    </div>
+    <div class="col-lg-12 fv-row">
+        <!--begin::Label-->
+        <label class="col-form-label  fw-bold fs-6">{{ __('Phone réclamation 1') }}</label>
+        <!--end::Label-->
+        <div class="input-group lang_container" id="lang_container_addr">
+            
+            <input
+                type="text"
+                placeholder="{{ __('Phone réclamation 1') }}"
+                name="phone_reclamation_1"
+                title="Phone réclamation 1"
+                class="form-control section-title form-control-multilingual "
+                value="{{ isset($model) && isset($model->phone_reclamation_1 ) ? $model->phone_reclamation_1 : '' }}"
+            >
+        </div>
+    </div>
+    <div class="col-lg-12 fv-row">
+        <!--begin::Label-->
+        <label class="col-form-label  fw-bold fs-6">{{ __('Phone Chef de bureau 1') }}</label>
+        <!--end::Label-->
+        <div class="input-group lang_container" id="lang_container_addr">
+            
+            <input
+                type="text"
+                placeholder="{{ __('Phone Chef de bureau 1') }}"
+                name="phone_Chef_de_bureau_1"
+                title="Phone Chef de bureau 1"
+                class="form-control section-title form-control-multilingual "
+                value="{{ isset($model) && isset($model->phone_Chef_de_bureau_1 ) ? $model->phone_Chef_de_bureau_1 : '' }}"
+            >
+        </div>
+    </div>
+    <div class="col-lg-12 fv-row">
+        <!--begin::Label-->
+        <label class="col-form-label  fw-bold fs-6">{{ __('Location') }}</label>
+        <!--end::Label-->
+        <div class="input-group lang_container" id="lang_container_addr">
+            
+            <input
+                type="text"
+                placeholder="{{ __('Location') }}"
+                name="location"
+                title="Location"
+                class="form-control section-title form-control-multilingual "
+                value="{{ isset($model) && isset($model->location ) ? $model->location : '' }}"
+            >
+        </div>
+    </div>
     <!--end::Input group-->
 </div>
 <!--end::Input group-->

@@ -88,7 +88,7 @@ class StopDeskController extends Controller
      */
     public function store(StopDeskRequest $request)
     {
-        $data = $request->only(['state_id','country_id','company_id','name','phone','address','reference']);
+        $data = $request->only(['state_id','country_id','company_id','name','phone','address','reference','phone_commercial_2','phone_reclamation_1','phone_Chef_de_bureau_1','location']);
         // $data['name'] = json_encode($request->name);
         $stopdesk = StopDesk::create($data);
         return redirect()->route('stopdesks.index')->with(['message_alert' => __('cargo::messages.created')]);
@@ -144,7 +144,7 @@ class StopDeskController extends Controller
         }
 
         $stopdesk = StopDesk::findOrFail($id);
-        $data = $request->only(['state_id','country_id','company_id','name','phone','address','reference']);
+        $data = $request->only(['state_id','country_id','company_id','name','phone','address','reference','phone_commercial_2','phone_reclamation_1','phone_Chef_de_bureau_1','location']);
         $data['name'] = json_encode($request->name);
         $stopdesk->update($data);
         return redirect()->route('stopdesks.index')->with(['message_alert' => __('cargo::messages.saved')]);
