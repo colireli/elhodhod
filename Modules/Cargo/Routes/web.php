@@ -165,7 +165,8 @@ if (\Illuminate\Support\Facades\Schema::hasTable('translations') && check_module
                 Route::get('plan-for-company/{id}', 'CompanyPlanController@plan_for_company')->name('admin.plan-for-company');
                 Route::get('/plan-createArea', 'PlanController@createArea')->name('admin.plan.createArea');
                 Route::get('/plan-createStopDesk', 'PlanController@createStopDesk')->name('admin.plan.createStopDesk');
-                
+                Route::get('/plan-getStopDesk', 'PlanController@getStopDesk')->name('admin.plan.getStopDesk');
+
                 // Route::get('get-states-ajax', 'CompanyPlanController@getStates')->name('admin.shipments.get-states-ajax');
 
                 //RapPayment

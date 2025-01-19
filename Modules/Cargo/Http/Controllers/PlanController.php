@@ -554,21 +554,26 @@ class PlanController extends Controller
            
             $planfee = PlanFee::find($request->id);
                if($planfee){
-                $stopdesk_ =  StopDesk::create([
-                    'country_id' => 4,
-                    'state_id'=> $planfee->state_id,
-                    'company_id'=> $request->company,
-                    'name' => $request->sd_name,
-                    'reference' => $request->sd_ref,
-                    'phone' => $request->sd_phone,
-                    'address' => $request->sd_addr,
-                    'created_at'    => now(),
-                    'updated_at'    => now()
-                ]);
-                
-                if($stopdesk_){
+                if(!$request->stopdesk || $request->stopdesk == "0"){
+                    $stopdesk_ =  StopDesk::create([
+                        'country_id' => 4,
+                        'state_id'=> $planfee->state_id,
+                        'company_id'=> $request->company,
+                        'name' => $request->sd_name,
+                        'reference' => $request->sd_ref,
+                        'phone' => $request->sd_phone,
+                        'address' => $request->sd_addr,
+                        'created_at'    => now(),
+                        'updated_at'    => now()
+                    ]);
+                    $stopdesk = $stopdesk_->id;
+                }else{
+                    $stopdesk = $request->stopdesk;
+                }
+
+                if($stopdesk){
                     PlanStopDeskFee::insert([
-                        'stopdesk_id'      => $stopdesk_->id,
+                        'stopdesk_id'      => $stopdesk,
                         'plan_id'       => $planfee->plan_id,
                         'plan_fee_id'    => $planfee->id,
                         'home_fee' => $planfee->home_fee,
@@ -593,4 +598,11 @@ class PlanController extends Controller
         
         return true ;
     } 
+
+    public function getStopDesk(Request $request)
+    {
+        $state_id = $request->state_id;
+        $areas = StopDesk::where('state_id', $state_id)->get();
+        return response()->json($areas);
+    }
 }

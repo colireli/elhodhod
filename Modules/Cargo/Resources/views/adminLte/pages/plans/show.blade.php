@@ -54,7 +54,7 @@
                         </td>
                         <td>
                             <a href="{{ route('admin.plan.showstopdesk', $fee->id) }}"> {{ __('Stop Desk') }}</a>
-                            <button type="button" class="btn btn-sm btn-secondary btn-action-table" onclick="openCreateStopDesk({{$fee->id}}, '{{ $fee->state->name }}', {{$fee->company}})" title="{{ __('view.create') }}">
+                            <button type="button" class="btn btn-sm btn-secondary btn-action-table" onclick="openCreateStopDesk({{$fee->id}}, '{{ $fee->state->name }}', {{$fee->company}}, {{ $fee->state->id }})" title="{{ __('view.create') }}">
                                 <i class="fas fa-add fa-fw"></i>
                             </button>
                             
@@ -179,11 +179,18 @@
                     });
     }
 
-    function openCreateStopDesk(id,state,company)
+    function openCreateStopDesk(id,state,company,state_id)
     {
+
             Swal.fire({
                     title: "Create New Stop desk Into " + state,
                     html: `
+                        <select class="form-control kt-select2 how-know-us" data-control="select2"
+                             style="width:100%" id="stopdesk_id" name="stopdesk">
+                            <option value="0">{{__('Select Stop Desk')}}</option>
+                        </select>
+                        <br>
+                        <label>Create </label>
                         <input id="sd_name" class="swal2-input" placeholder="name">
                         <input id="sd_ref" class="swal2-input" placeholder="reference">
                         <input id="sd_phone" class="swal2-input" placeholder="phone">
@@ -193,16 +200,17 @@
                     confirmButtonText: 'Create',
                     preConfirm: () => {
                         return [
-                        document.getElementById('sd_name').value,
-                        document.getElementById('sd_ref').value,
-                        document.getElementById('sd_phone').value,
-                        document.getElementById('sd_addr').value
+                            document.getElementById('sd_name').value,
+                            document.getElementById('sd_ref').value,
+                            document.getElementById('sd_phone').value,
+                            document.getElementById('sd_addr').value,
+                            document.getElementById('stopdesk_id').value
                         ]
                     }
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Trigger the button click event to proceed with the server event
-                            $.get("{{fr_route('admin.plan.createStopDesk')}}?id="+id+"&company="+company+"&sd_name="+result.value[0]+"&sd_ref="+result.value[1]+"&sd_phone="+result.value[2]+"&sd_addr="+result.value[3]).then(response => {
+                            $.get("{{fr_route('admin.plan.createStopDesk')}}?id="+id+"&company="+company+"&sd_name="+result.value[0]+"&sd_ref="+result.value[1]+"&sd_phone="+result.value[2]+"&sd_addr="+result.value[3]+"&stopdesk="+result.value[4]).then(response => {
                                 if(response){
 
                                     Swal.fire('Success!', 'Your stopdesk has been created.', 'success');
@@ -213,6 +221,20 @@
                             });
                         }
                     });
+
+            $.get("{{fr_route('admin.plan.getStopDesk')}}?state_id="+state_id).then(data => {
+            if(data){
+                $('select[name ="stopdesk"]').empty();
+                    $('select[name ="stopdesk"]').append('<option value="0">Select Stop Desk</option>');
+                    for (let index = 0; index < data.length; index++) {
+                        const element = data[index];
+                        $('select[name ="stopdesk"]').append('<option value="' + element['id'] +
+                            '">' + element['name'] +
+                            '</option>');
+                    }
+
+            }
+        });
     }
 
 </script>
