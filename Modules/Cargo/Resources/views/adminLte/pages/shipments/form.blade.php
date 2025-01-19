@@ -608,7 +608,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="col-form-label fw-bold fs-6 required">{{ __('cargo::view.to_area') / __('stop desk')}}</label>
+                    <label class="col-form-label fw-bold fs-6 required">{{ __('cargo::view.to_area')}} / {{__('stop desk')}}</label>
                     <select name="Shipment[to_area_id]" class="form-control select-area @error('Shipment.to_area_id') is-invalid @enderror">
                         <option value=""></option>
                         @if($typeForm == 'edit')
