@@ -429,8 +429,12 @@ class ShipmentController extends Controller
             if (!$model->save()) {
                 return response()->json(['message' => new \Exception()] );
             }
-            $this->createExternColi($model,$request->Package);
-            $message = 'Shipment added successfully';
+            $responseCreation = $this->createExternColi($model,$request->Package);
+            if($responseCreation['error']){
+                $message = $responseCreation['message'];
+            }else{
+                $message = 'Shipment added successfully';
+            }
             return response()->json(['code' => $model->code , 'order_id' => $model->order_id, 'message' => $message]);
         }else {
             return $model;
