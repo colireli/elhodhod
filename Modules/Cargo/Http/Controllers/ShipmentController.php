@@ -2173,8 +2173,8 @@ class ShipmentController extends Controller
                     $type_id[0]      		=> $type_id[1]?$type_id[1]:1,
                     $apiModel->poids        => (int) $model->total_weight,
                     $apiModel->stop_desk    => ($model->delivery_type == Shipment::DESK) ? 1 : 0,
-                    $apiModel->stock        => 0,
-                    $apiModel->ref_stopdesk => StopDesk::find($model->to_area_id)->reference
+                    $apiModel->stock        => 0
+                   // $apiModel->ref_stopdesk => StopDesk::find($model->to_area_id)->reference
 
                 ];
 
