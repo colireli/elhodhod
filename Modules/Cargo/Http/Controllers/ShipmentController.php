@@ -2376,11 +2376,7 @@ class ShipmentController extends Controller
                 }
             }
         }
-        if($response['success'] == 0)
-        {
-            return back()->with(['message_alert' => $response['error_msg'] ]);
 
-        }
         return back()->with(['message_alert' => __('Status Updated') ]);
     }
 
