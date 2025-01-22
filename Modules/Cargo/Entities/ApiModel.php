@@ -10,7 +10,7 @@ class ApiModel extends Model
 {
     protected $table = 'api_models';
     use HasFactory;
-    protected $fillable = ['name','code','img','api_token','user_guid','reference','client','phone','adresse','wilaya_id','commune','montant','remarque','produit','type_id','poids','stop_desk','stock','quantite','tracking','success','activity','is_archived'];
+    protected $fillable = ['name','code','img','api_token','user_guid','reference','client','phone','adresse','wilaya_id','commune','montant','remarque','produit','type_id','poids','stop_desk','ref_stopdesk','stock','quantite','tracking','success','activity','is_archived'];
 
     /**
      * Get all of the companies for the Model
