@@ -171,7 +171,7 @@
                         @if(isset($shipment->to_area))
                             <div class="d-flex flex-column flex-root">
                                     <span class="mb-4 text-dark font-weight-bold">{{ __('cargo::view.to_area') }}</span>
-                                    <span class="text-muted font-weight-bolder font-size-lg">{{$shipment->to_area->name}}</span>
+                                    <span class="text-muted font-weight-bolder font-size-lg">{{($shipment->delivery_type == 1)?$shipment->to_area->name:$shipment->to_stopdesk->address .' ('.$shipment->to_stopdesk->name.')'}}</span>
                             </div>
                         @endif
                     </div>

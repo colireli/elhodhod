@@ -100,6 +100,12 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'custom' => [
+            'driver' => 'single', // You can also use 'daily' or another driver
+            'path' => storage_path('logs/custom.log'),
+            'level' => 'debug', // Log level, e.g., 'info', 'error', etc.
+        ],
     ],
 
 ];

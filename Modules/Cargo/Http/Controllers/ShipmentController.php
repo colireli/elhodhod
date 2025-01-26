@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 use Modules\Cargo\Http\DataTables\ShipmentsDataTable;
 use Modules\Cargo\Http\Requests\ShipmentRequest;
 use Modules\Cargo\Entities\Shipment;
@@ -2178,6 +2179,7 @@ class ShipmentController extends Controller
 
                 ];
 
+               
                 try {
 
                   $response = Http::withHeaders([
@@ -2190,6 +2192,7 @@ class ShipmentController extends Controller
                                     $response = Http::post($url, $data);
                                 }
 
+
                     if ($response->successful() && $response->status() == 200) {
                         $model->track = $this->searchJsonValue($response->json(), $apiModel->tracking);
                       	//$model->track = $response->json($apiModel->tracking)?$response->json($apiModel->tracking) : $response->json()['Colis'][0][$apiModel->tracking];
@@ -2199,18 +2202,31 @@ class ShipmentController extends Controller
                         }
                     } else {
                         $message = "Something went wrong With ".$apiModel->name." Api! : ".$response->body() ;
+                        Log::channel('custom')->error('Error occurred.', [
+                            'error' => true,
+                            'context' => $message,
+                        ]);
                       	return ['error' => true,'message' =>$message] ;
                         // return back()->with(['error_message_alert' => __($message)]);
                        // return response()->json(["status" => false, "message" => "Something went wrong With ".$apiModel->name." Api!" . $response->body()]);
                     }
                 } catch (\Throwable $th) {
                     $message = "Cant be created ".$apiModel->name." Api! error :". $th ;
+
+                    Log::channel('custom')->error('Error occurred.', [
+                        'error' => true,
+                        'context' => $message,
+                    ]);
                     return ['error' => true,'message' =>$message] ;
                     // return back()->with(['error_message_alert' => __($message)]);
                     // return response()->json(["status" => false, "message" => "Cant be created ".$apiModel->name." Api!"]);
                 }
             }else{
                 $message = "Cant find Api!";
+                Log::channel('custom')->error('Error occurred.', [
+                    'error' => true,
+                    'context' => $message,
+                ]);
                 return ['error' => true,'message' =>$message] ;
               
                 // return back()->with(['error_message_alert' => __($message)]);

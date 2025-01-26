@@ -317,6 +317,9 @@ class Shipment extends Model implements HasMedia
     public function to_area(){
 		return $this->hasOne('Modules\Cargo\Entities\Area', 'id' , 'to_area_id');
 	}
+    public function to_stopdesk(){
+		return $this->hasOne('Modules\Cargo\Entities\StopDesk', 'id' , 'to_area_id');
+	}
     public function from_address(){
 		return $this->hasOne('Modules\Cargo\Entities\ClientAddress', 'id' , 'client_address');
 	}
