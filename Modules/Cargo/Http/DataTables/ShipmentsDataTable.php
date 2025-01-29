@@ -82,7 +82,7 @@ class ShipmentsDataTable extends DataTable
                 return $model->to_state_id ? $model->to_state->name : '';
             })
             ->editColumn('to_area_id', function (Shipment $model) {
-                return $model->to_area_id ? $model->to_area->name : '';
+                return $model->to_area_id && $model->delivery_type == 2 &&  $model->to_stopdesk ? $model->to_stopdesk->name : $model->to_area->name ;
             })
             ->editColumn('status_id', function (Shipment $model) {
                 return $model->getStatus() ? $model->getStatus() : '';

@@ -58,7 +58,7 @@ $cash_payment = 'cash_payment';
                                                 <tr>
                                                     <td style="padding-left:10px;font-size: 14px;white-space: pre-line;word-wrap: break-word;max-width: 360px;">
                                                       @if(isset($shipment->to_state)){{$shipment->to_state->name ?? 'Null'}} @endif
-                                                      @if(isset($shipment->to_area)){{$shipment->to_area->name ?? 'Null'}} @endif
+                                                      @if(isset($shipment->to_area) && $shipment->delivery_type == 1 ){{$shipment->to_area->name ?? 'Null'}} @else {{ $shipment->to_stopdesk->address ?? 'Null'}} @endif
 
                                                   	</td>
 
