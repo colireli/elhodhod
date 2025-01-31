@@ -1,15 +1,6 @@
-<IfModule mod_rewrite.c>
-Options +FollowSymLinks
+# Enable URL Rewriting
 RewriteEngine On
-
-RewriteCond %{REQUEST_URI} !^/public/ 
-
-RewriteCond %{REQUEST_FILENAME} !-d
+# Rewrite rule to redirect requests to index.php
 RewriteCond %{REQUEST_FILENAME} !-f
-
-
-
-RewriteRule ^(.*)$ /public/$1 
-#RewriteRule ^ index.php [L]
-RewriteRule ^(/)?$ public/index.php [L] 
-</IfModule>
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?/$1 [L]
