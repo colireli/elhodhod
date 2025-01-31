@@ -2188,16 +2188,19 @@ class ShipmentController extends Controller
                                   ])
                                   ->withBody(json_encode(['Colis' => [$data]]), 'application/json')
                                   ->post($url,$data);
+
+                                  $message = "----- 2 ----- ".$response;
+                                Log::channel('custom')->error('Error occurred. -> '.  $message, [
+                                    'error' => true,
+                                    'context' => $message,
+                                ]);
+
 								if (!($response->successful() && $response->status() == 200)) {
                                     $response = Http::post($url, $data);
                                 }
 
 
-                                $message = "----- 1 ----- ".$response;
-                                Log::channel('custom')->error('Error occurred. -> '.  $message, [
-                                    'error' => true,
-                                    'context' => $message,
-                                ]);
+                                
 
                     if ($response->successful() && $response->status() == 200) {
                         $model->track = $this->searchJsonValue($response->json(), $apiModel->tracking);
