@@ -2202,7 +2202,7 @@ class ShipmentController extends Controller
                         }
                     } else {
                         $message = "Something went wrong With ".$apiModel->name." Api! : ".$response->body() ;
-                        Log::channel('custom')->error('Error occurred.', [
+                        Log::channel('custom')->error('Error occurred. -> '.  $message, [
                             'error' => true,
                             'context' => $message,
                         ]);
@@ -2213,7 +2213,7 @@ class ShipmentController extends Controller
                 } catch (\Throwable $th) {
                     $message = "Cant be created ".$apiModel->name." Api! error :". $th ;
 
-                    Log::channel('custom')->error('Error occurred.', [
+                    Log::channel('custom')->error('Error occurred. -> '.  $message, [
                         'error' => true,
                         'context' => $message,
                     ]);
@@ -2223,7 +2223,7 @@ class ShipmentController extends Controller
                 }
             }else{
                 $message = "Cant find Api!";
-                Log::channel('custom')->error('Error occurred.', [
+                Log::channel('custom')->error('Error occurred. -> '.  $message, [
                     'error' => true,
                     'context' => $message,
                 ]);
