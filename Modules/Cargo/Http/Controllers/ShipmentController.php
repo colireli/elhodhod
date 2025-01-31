@@ -2190,13 +2190,14 @@ class ShipmentController extends Controller
                                   ->post($url,$data);
 								if (!($response->successful() && $response->status() == 200)) {
                                     $response = Http::post($url, $data);
-                                    $message = "----- 1 ----- ".$response->body() ;
-                                    Log::channel('custom')->error('Error occurred. -> '.  $message, [
-                                        'error' => true,
-                                        'context' => $message,
-                                    ]);
                                 }
 
+
+                                $message = "----- 1 ----- ".$response;
+                                Log::channel('custom')->error('Error occurred. -> '.  $message, [
+                                    'error' => true,
+                                    'context' => $message,
+                                ]);
 
                     if ($response->successful() && $response->status() == 200) {
                         $model->track = $this->searchJsonValue($response->json(), $apiModel->tracking);
